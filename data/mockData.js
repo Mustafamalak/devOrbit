@@ -178,3 +178,391 @@ export const orbitProjects = [
       "A visual workflow automation builder for designing integrations, AI agents, triggers, and execution pipelines.",
   },
 ];
+
+export const projectsPageData = [
+  {
+    id: 1,
+    name: "TeamFinder",
+    category: "Full-stack Platform",
+    status: "Healthy",
+    health: 88,
+    progress: 76,
+    priority: "High",
+    deadline: "12 May 2026",
+    description:
+      "Hackathon team formation platform with profiles, team requests, hackathon discovery, and collaboration workflows.",
+    stack: ["Next.js", "Express", "MongoDB", "Tailwind"],
+    tasks: 18,
+    bugs: 2,
+    commits: 42,
+  },
+  {
+    id: 2,
+    name: "DevOrbit",
+    category: "3D Frontend Product",
+    status: "Warning",
+    health: 74,
+    progress: 58,
+    priority: "Critical",
+    deadline: "20 May 2026",
+    description:
+      "A futuristic developer productivity command center with 3D project orbits, workflow analytics, and animated dashboards.",
+    stack: ["React", "Three.js", "Framer Motion", "Recharts"],
+    tasks: 11,
+    bugs: 4,
+    commits: 31,
+  },
+  {
+    id: 3,
+    name: "PsycheMail",
+    category: "AI Productivity Tool",
+    status: "Critical",
+    health: 61,
+    progress: 44,
+    priority: "Medium",
+    deadline: "28 May 2026",
+    description:
+      "AI-assisted email sentiment analyzer and response generator for improving communication productivity.",
+    stack: ["Node.js", "LLM API", "Express", "MongoDB"],
+    tasks: 9,
+    bugs: 6,
+    commits: 19,
+  },
+  {
+    id: 4,
+    name: "CampusPulse",
+    category: "Student Operating System",
+    status: "Healthy",
+    health: 91,
+    progress: 82,
+    priority: "High",
+    deadline: "02 June 2026",
+    description:
+      "Campus platform for clubs, events, placements, lost-and-found, announcements, and student coordination.",
+    stack: ["Next.js", "Maps", "MongoDB", "Tailwind"],
+    tasks: 14,
+    bugs: 1,
+    commits: 38,
+  },
+  {
+    id: 5,
+    name: "FlowForge",
+    category: "Automation Builder",
+    status: "Warning",
+    health: 69,
+    progress: 36,
+    priority: "Medium",
+    deadline: "14 June 2026",
+    description:
+      "Visual workflow automation builder for AI agents, triggers, APIs, and execution pipelines.",
+    stack: ["React Flow", "Framer Motion", "Node.js", "API"],
+    tasks: 21,
+    bugs: 5,
+    commits: 16,
+  },
+  {
+    id: 6,
+    name: "Wanderlust",
+    category: "Travel Listing App",
+    status: "Healthy",
+    health: 84,
+    progress: 93,
+    priority: "Low",
+    deadline: "Archived",
+    description:
+      "Airbnb-style listing platform with authentication, image uploads, reviews, ratings, and RESTful routing.",
+    stack: ["Express", "EJS", "Cloudinary", "MongoDB"],
+    tasks: 4,
+    bugs: 1,
+    commits: 54,
+  },
+];
+
+export const taskColumns = [
+  {
+    id: "backlog",
+    title: "Backlog",
+    subtitle: "Ideas waiting for execution",
+    accent: "cyan",
+    tasks: [
+      {
+        id: 1,
+        title: "Design mobile navigation drawer",
+        project: "DevOrbit",
+        priority: "High",
+        due: "Today",
+        points: 5,
+        tags: ["UI", "Responsive"],
+      },
+      {
+        id: 2,
+        title: "Create onboarding screen concept",
+        project: "TeamFinder",
+        priority: "Medium",
+        due: "Tomorrow",
+        points: 3,
+        tags: ["UX", "Flow"],
+      },
+      {
+        id: 3,
+        title: "Prepare reusable chart card component",
+        project: "DevOrbit",
+        priority: "Low",
+        due: "18 May",
+        points: 2,
+        tags: ["Charts", "Component"],
+      },
+    ],
+  },
+  {
+    id: "progress",
+    title: "In Progress",
+    subtitle: "Currently being built",
+    accent: "purple",
+    tasks: [
+      {
+        id: 4,
+        title: "Build animated Kanban task radar",
+        project: "DevOrbit",
+        priority: "Critical",
+        due: "Today",
+        points: 8,
+        tags: ["Frontend", "Motion"],
+      },
+      {
+        id: 5,
+        title: "Improve project card hover states",
+        project: "DevOrbit",
+        priority: "High",
+        due: "Today",
+        points: 5,
+        tags: ["Animation", "UI"],
+      },
+    ],
+  },
+  {
+    id: "review",
+    title: "Review",
+    subtitle: "Needs final inspection",
+    accent: "yellow",
+    tasks: [
+      {
+        id: 6,
+        title: "Validate 3D orbit scene responsiveness",
+        project: "DevOrbit",
+        priority: "High",
+        due: "Tomorrow",
+        points: 5,
+        tags: ["Three.js", "QA"],
+      },
+      {
+        id: 7,
+        title: "Check dashboard chart readability",
+        project: "DevOrbit",
+        priority: "Medium",
+        due: "19 May",
+        points: 3,
+        tags: ["Recharts", "Polish"],
+      },
+    ],
+  },
+  {
+    id: "done",
+    title: "Done",
+    subtitle: "Completed sprint work",
+    accent: "emerald",
+    tasks: [
+      {
+        id: 8,
+        title: "Create app shell with sidebar and topbar",
+        project: "DevOrbit",
+        priority: "High",
+        due: "Done",
+        points: 5,
+        tags: ["Layout", "Navigation"],
+      },
+      {
+        id: 9,
+        title: "Build project fleet page",
+        project: "DevOrbit",
+        priority: "High",
+        due: "Done",
+        points: 8,
+        tags: ["Projects", "Cards"],
+      },
+      {
+        id: 10,
+        title: "Implement 3D project orbit map",
+        project: "DevOrbit",
+        priority: "Critical",
+        due: "Done",
+        points: 13,
+        tags: ["Three.js", "Highlight"],
+      },
+    ],
+  },
+];
+
+export const activityTimelineData = [
+  {
+    id: 1,
+    type: "commit",
+    title: "Implemented animated Kanban workflow",
+    project: "DevOrbit",
+    description:
+      "Added task radar columns, animated task cards, sprint points, and priority badges.",
+    actor: "Mustafa",
+    time: "12 minutes ago",
+    branch: "feature/task-radar",
+    status: "success",
+  },
+  {
+    id: 2,
+    type: "pull_request",
+    title: "Merged 3D orbit map into command center",
+    project: "DevOrbit",
+    description:
+      "Integrated React Three Fiber scene with orbiting projects, project inspection panel, and interactive controls.",
+    actor: "Mustafa",
+    time: "46 minutes ago",
+    branch: "feature/orbit-map",
+    status: "merged",
+  },
+  {
+    id: 3,
+    type: "issue",
+    title: "Orbit scene needs mobile layout optimization",
+    project: "DevOrbit",
+    description:
+      "3D canvas works well on desktop but needs better height and side panel behavior on smaller screens.",
+    actor: "System",
+    time: "1 hour ago",
+    branch: "ui/responsive",
+    status: "warning",
+  },
+  {
+    id: 4,
+    type: "deploy",
+    title: "Dashboard shell deployed to preview",
+    project: "DevOrbit",
+    description:
+      "Preview deployment generated for layout, dashboard cards, charts, sidebar, and topbar.",
+    actor: "Pipeline",
+    time: "2 hours ago",
+    branch: "main",
+    status: "success",
+  },
+  {
+    id: 5,
+    type: "review",
+    title: "Reviewed project fleet page animations",
+    project: "DevOrbit",
+    description:
+      "Checked card hover states, filter interactions, search input, spacing, and visual consistency.",
+    actor: "Mustafa",
+    time: "3 hours ago",
+    branch: "feature/projects-fleet",
+    status: "reviewed",
+  },
+  {
+    id: 6,
+    type: "bug",
+    title: "Fixed sidebar active route state",
+    project: "DevOrbit",
+    description:
+      "Improved route-aware navigation highlighting using pathname matching inside the command shell.",
+    actor: "Mustafa",
+    time: "4 hours ago",
+    branch: "fix/sidebar-state",
+    status: "fixed",
+  },
+];
+
+export const activityStats = [
+  {
+    label: "Commits",
+    value: 126,
+    detail: "+41 this week",
+  },
+  {
+    label: "Pull Requests",
+    value: 18,
+    detail: "6 merged",
+  },
+  {
+    label: "Issues Closed",
+    value: 23,
+    detail: "9 bugs fixed",
+  },
+  {
+    label: "Deployments",
+    value: 7,
+    detail: "3 previews live",
+  },
+];
+
+export const insightCards = [
+  {
+    label: "Productivity Score",
+    value: 87,
+    suffix: "%",
+    detail: "+12% from last sprint",
+    tone: "cyan",
+  },
+  {
+    label: "Focus Hours",
+    value: 34,
+    suffix: "h",
+    detail: "6.5h daily average",
+    tone: "purple",
+  },
+  {
+    label: "Task Closure",
+    value: 72,
+    suffix: "%",
+    detail: "18 tasks completed",
+    tone: "emerald",
+  },
+  {
+    label: "Bug Pressure",
+    value: 19,
+    suffix: "%",
+    detail: "-8% improvement",
+    tone: "red",
+  },
+];
+
+export const weeklyCommitData = [
+  { day: "Mon", commits: 18, pullRequests: 3 },
+  { day: "Tue", commits: 24, pullRequests: 5 },
+  { day: "Wed", commits: 16, pullRequests: 2 },
+  { day: "Thu", commits: 31, pullRequests: 6 },
+  { day: "Fri", commits: 22, pullRequests: 4 },
+  { day: "Sat", commits: 10, pullRequests: 1 },
+  { day: "Sun", commits: 5, pullRequests: 1 },
+];
+
+export const taskCompletionData = [
+  { name: "Backlog", value: 22 },
+  { name: "In Progress", value: 18 },
+  { name: "Review", value: 14 },
+  { name: "Done", value: 46 },
+];
+
+export const bugTrendData = [
+  { sprint: "S1", bugs: 17, resolved: 8 },
+  { sprint: "S2", bugs: 14, resolved: 9 },
+  { sprint: "S3", bugs: 20, resolved: 13 },
+  { sprint: "S4", bugs: 12, resolved: 15 },
+  { sprint: "S5", bugs: 9, resolved: 18 },
+];
+
+export const focusHoursData = [
+  { day: "Mon", hours: 4.5 },
+  { day: "Tue", hours: 6.2 },
+  { day: "Wed", hours: 5.1 },
+  { day: "Thu", hours: 7.4 },
+  { day: "Fri", hours: 6.8 },
+  { day: "Sat", hours: 3.2 },
+  { day: "Sun", hours: 1.8 },
+];
