@@ -83,3 +83,28 @@ body {
     0 0 40px rgba(34, 211, 238, 0.25),
     0 0 90px rgba(139, 92, 246, 0.16);
 }
+
+@media (max-width: 768px) {
+  body {
+    background:
+      radial-gradient(circle at top, rgba(34, 211, 238, 0.12), transparent 24rem),
+      radial-gradient(circle at bottom, rgba(139, 92, 246, 0.12), transparent 24rem),
+      var(--background);
+  }
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+canvas {
+  touch-action: none;
+}

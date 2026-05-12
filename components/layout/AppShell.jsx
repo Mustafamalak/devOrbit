@@ -1,7 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
+import MobileSidebar from "@/components/layout/MobileSidebar";
+import CommandPalette from "@/components/layout/CommandPalette";
 
 export default function AppShell({ children }) {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [commandOpen, setCommandOpen] = useState(false);
+
+  useEffect(() => {
+    function handleShortcut(event) {
+      const isMac = navigator.platform.toLowerCase().includes("mac");
+      const shortcutPressed = isMac
+        ? event.metaKey && event.key.toLowerCase() === "k"
+        : event.ctrlKey && event.key.toLowerCase() === "k";
+
+      if (shortcutPressed) {
+        event.preventDefault();
+        setCommandOpen((current) => !current);
+      }
+    }
+
+    window.addEventListener("keydown", handleShortcut);
+    return () => window.removeEventListener("keydown", handleShortcut);
+  }, []);
+
   return (
     <div className="min-h-screen text-white">
       <div className="fixed inset-0 -z-20 bg-slate-950" />
@@ -11,8 +36,21 @@ export default function AppShell({ children }) {
 
       <Sidebar />
 
+      <MobileSidebar
+        open={mobileNavOpen}
+        onClose={() => setMobileNavOpen(false)}
+      />
+
+      <CommandPalette
+        open={commandOpen}
+        onClose={() => setCommandOpen(false)}
+      />
+
       <main className="min-h-screen px-4 py-4 lg:ml-80 lg:px-6">
-        <Topbar />
+        <Topbar
+          onMenuClick={() => setMobileNavOpen(true)}
+          onCommandClick={() => setCommandOpen(true)}
+        />
         {children}
       </main>
     </div>

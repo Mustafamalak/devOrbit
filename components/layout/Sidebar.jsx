@@ -2,50 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Activity,
-  BarChart3,
-  Boxes,
-  Gauge,
-  LayoutDashboard,
-  Orbit,
-  Sparkles,
-  Target,
-} from "lucide-react";
+import { Gauge, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const navItems = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    label: "Orbit Map",
-    href: "/orbit",
-    icon: Orbit,
-  },
-  {
-    label: "Projects",
-    href: "/projects",
-    icon: Boxes,
-  },
-  {
-    label: "Tasks",
-    href: "/tasks",
-    icon: Target,
-  },
-  {
-    label: "Activity",
-    href: "/activity",
-    icon: Activity,
-  },
-  {
-    label: "Insights",
-    href: "/insights",
-    icon: BarChart3,
-  },
-];
+import { commandNavItems } from "@/data/navigation";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -66,7 +25,7 @@ export default function Sidebar() {
       </Link>
 
       <nav className="space-y-2">
-        {navItems.map((item) => {
+        {commandNavItems.map((item) => {
           const Icon = item.icon;
           const active = pathname === item.href;
 
