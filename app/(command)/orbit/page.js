@@ -1,11 +1,4 @@
-import dynamic from "next/dynamic";
-
-const ProjectOrbitScene = dynamic(
-  () => import("@/components/orbit/ProjectOrbitScene"),
-  {
-    ssr: false,
-  }
-);
+import ProjectOrbitClient from "@/components/orbit/ProjectOrbitClient";
 
 export default function OrbitPage() {
   return (
@@ -26,7 +19,7 @@ export default function OrbitPage() {
         </p>
       </section>
 
-      <ProjectOrbitScene />
+      <ProjectOrbitClient />
     </div>
   );
 }
