@@ -1,0 +1,180 @@
+export const metrics = [
+  {
+    label: "Active Projects",
+    value: 7,
+    change: "+2 this week",
+    tone: "cyan",
+  },
+  {
+    label: "Open Tasks",
+    value: 34,
+    change: "12 high priority",
+    tone: "purple",
+  },
+  {
+    label: "Bugs Detected",
+    value: 9,
+    change: "-18% from last sprint",
+    tone: "red",
+  },
+  {
+    label: "Weekly Commits",
+    value: 126,
+    change: "+41 commits",
+    tone: "emerald",
+  },
+];
+
+export const projectHealth = [
+  {
+    name: "TeamFinder",
+    type: "Full-stack platform",
+    health: 88,
+    status: "Healthy",
+    stack: ["Next.js", "Express", "MongoDB"],
+  },
+  {
+    name: "DevOrbit",
+    type: "Frontend command center",
+    health: 74,
+    status: "Warning",
+    stack: ["React", "Three.js", "Tailwind"],
+  },
+  {
+    name: "PsycheMail",
+    type: "AI email assistant",
+    health: 61,
+    status: "Needs Review",
+    stack: ["Node.js", "LLM", "API"],
+  },
+];
+
+export const productivityData = [
+  { day: "Mon", commits: 18, tasks: 7 },
+  { day: "Tue", commits: 24, tasks: 9 },
+  { day: "Wed", commits: 16, tasks: 5 },
+  { day: "Thu", commits: 31, tasks: 11 },
+  { day: "Fri", commits: 22, tasks: 8 },
+  { day: "Sat", commits: 10, tasks: 4 },
+  { day: "Sun", commits: 5, tasks: 2 },
+];
+
+export const recentActivity = [
+  {
+    title: "Merged authentication protection",
+    meta: "TeamFinder · Pull Request",
+    time: "12 min ago",
+    status: "merged",
+  },
+  {
+    title: "Fixed dashboard routing conflict",
+    meta: "DevOrbit · Bug Fix",
+    time: "38 min ago",
+    status: "fixed",
+  },
+  {
+    title: "Created productivity analytics layout",
+    meta: "DevOrbit · Feature",
+    time: "1 hr ago",
+    status: "created",
+  },
+  {
+    title: "Detected 3 stale tasks in sprint board",
+    meta: "System Intelligence · Alert",
+    time: "2 hrs ago",
+    status: "warning",
+  },
+];
+
+export const orbitProjects = [
+  {
+    id: 1,
+    name: "TeamFinder",
+    type: "Collaboration Platform",
+    status: "Healthy",
+    health: 88,
+    progress: 76,
+    tasks: 18,
+    bugs: 2,
+    commits: 42,
+    stack: ["Next.js", "Express", "MongoDB"],
+    color: "#22d3ee",
+    orbitRadius: 3.1,
+    size: 0.34,
+    speed: 0.42,
+    description:
+      "A hackathon team formation platform helping students discover teammates, manage requests, and collaborate around project ideas.",
+  },
+  {
+    id: 2,
+    name: "DevOrbit",
+    type: "3D Productivity Dashboard",
+    status: "Warning",
+    health: 74,
+    progress: 58,
+    tasks: 11,
+    bugs: 4,
+    commits: 31,
+    stack: ["React", "Three.js", "Tailwind"],
+    color: "#8b5cf6",
+    orbitRadius: 4.15,
+    size: 0.42,
+    speed: 0.31,
+    description:
+      "A futuristic developer command center that turns projects, tasks, bugs, commits, and sprint insights into an interactive universe.",
+  },
+  {
+    id: 3,
+    name: "PsycheMail",
+    type: "AI Email Assistant",
+    status: "Needs Review",
+    health: 61,
+    progress: 44,
+    tasks: 9,
+    bugs: 6,
+    commits: 19,
+    stack: ["Node.js", "LLM", "API"],
+    color: "#ef4444",
+    orbitRadius: 5.2,
+    size: 0.31,
+    speed: 0.25,
+    description:
+      "An AI-assisted email sentiment and response generation system designed to improve communication workflows.",
+  },
+  {
+    id: 4,
+    name: "CampusPulse",
+    type: "Student OS",
+    status: "Healthy",
+    health: 91,
+    progress: 82,
+    tasks: 14,
+    bugs: 1,
+    commits: 38,
+    stack: ["Next.js", "Maps", "MongoDB"],
+    color: "#10b981",
+    orbitRadius: 6.05,
+    size: 0.38,
+    speed: 0.22,
+    description:
+      "A campus operating system for events, clubs, notices, placements, lost-and-found, and student coordination.",
+  },
+  {
+    id: 5,
+    name: "FlowForge",
+    type: "Automation Visualizer",
+    status: "Prototype",
+    health: 69,
+    progress: 36,
+    tasks: 21,
+    bugs: 5,
+    commits: 16,
+    stack: ["React Flow", "Framer", "API"],
+    color: "#f59e0b",
+    orbitRadius: 6.9,
+    size: 0.29,
+    speed: 0.18,
+    description:
+      "A visual workflow automation builder for designing integrations, AI agents, triggers, and execution pipelines.",
+  },
+];
