@@ -13,12 +13,12 @@ const icons = {
 };
 
 const tones = {
-  cyan: "from-cyan-400/20 to-cyan-400/5 text-cyan-300 shadow-cyan-500/20",
+  cyan: "from-pink-400/24 to-pink-400/5 text-pink-300 shadow-pink-500/20",
   purple:
-    "from-purple-400/20 to-purple-400/5 text-purple-300 shadow-purple-500/20",
-  red: "from-red-400/20 to-red-400/5 text-red-300 shadow-red-500/20",
+    "from-violet-400/24 to-violet-400/5 text-violet-300 shadow-violet-500/20",
+  red: "from-rose-400/24 to-rose-400/5 text-rose-300 shadow-rose-500/20",
   emerald:
-    "from-emerald-400/20 to-emerald-400/5 text-emerald-300 shadow-emerald-500/20",
+    "from-emerald-400/24 to-emerald-400/5 text-emerald-300 shadow-emerald-500/20",
 };
 
 export default function MetricCard({ metric, index }) {
@@ -26,26 +26,29 @@ export default function MetricCard({ metric, index }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: index * 0.08, duration: 0.45 }}
+      initial={{ opacity: 0, y: 18, scale: 0.96, filter: "blur(8px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      transition={{ delay: index * 0.08, duration: 0.5 }}
+      whileHover={{ y: -8, scale: 1.015 }}
     >
-      <GlassCard className="group relative overflow-hidden">
+      <GlassCard className="group relative overflow-hidden scanline">
         <div
-          className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-linear-to-br blur-2xl ${
+          className={`absolute right-0 top-0 h-36 w-36 rounded-full bg-linear-to-br blur-2xl ${
             tones[metric.tone]
           }`}
         />
 
+        <div className="absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-orange-500/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
+
         <div className="relative flex items-start justify-between">
           <div>
-            <p className="text-sm text-slate-400">{metric.label}</p>
+            <p className="text-sm text-[#a89bb8]">{metric.label}</p>
 
             <h2 className="mt-3 text-4xl font-black tracking-tight text-white">
               <CountUp end={metric.value} duration={1.4} />
             </h2>
 
-            <p className="mt-2 text-sm text-slate-400">{metric.change}</p>
+            <p className="mt-2 text-sm text-[#a89bb8]">{metric.change}</p>
           </div>
 
           <div
@@ -57,12 +60,12 @@ export default function MetricCard({ metric, index }) {
           </div>
         </div>
 
-        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-slate-800">
+        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-[#140c23]">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${60 + index * 10}%` }}
             transition={{ delay: 0.35 + index * 0.1, duration: 0.8 }}
-            className="h-full rounded-full bg-linear-to-r from-cyan-400 to-purple-500"
+            className="h-full rounded-full bg-linear-to-r from-pink-400 via-orange-400 to-violet-600"
           />
         </div>
       </GlassCard>
