@@ -41,7 +41,7 @@ export default function TechStackSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ delay: index * 0.04, duration: 0.35 }}
-            className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-center font-semibold text-white backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-300/30 hover:text-cyan-200"
+            className="rounded-3xl border border-white/10 bg-white/4 p-5 text-center font-semibold text-white backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-300/30 hover:text-cyan-200"
           >
             {tech}
           </motion.div>

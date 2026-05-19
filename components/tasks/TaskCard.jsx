@@ -27,7 +27,7 @@ export default function TaskCard({ task, index }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ delay: index * 0.06, duration: 0.36 }}
       whileHover={{ y: -5, scale: 1.015 }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-4 shadow-lg shadow-black/10 transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
+      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/4 p-4 shadow-lg shadow-black/10 transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
     >
       <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-cyan-500/10 blur-2xl opacity-0 transition group-hover:opacity-100" />
 

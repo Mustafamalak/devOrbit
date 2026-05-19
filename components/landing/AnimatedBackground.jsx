@@ -32,7 +32,7 @@ export default function AnimatedBackground() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute right-[-8%] top-[12%] h-[28rem] w-[28rem] rounded-full bg-purple-500/20 blur-3xl"
+        className="absolute right-[-8%] top-[12%] h-112 w-md rounded-full bg-purple-500/20 blur-3xl"
       />
 
       <motion.div
@@ -46,7 +46,7 @@ export default function AnimatedBackground() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute bottom-[-12%] left-[32%] h-[26rem] w-[26rem] rounded-full bg-emerald-500/10 blur-3xl"
+        className="absolute bottom-[-12%] left-[32%] h-104 w-104 rounded-full bg-emerald-500/10 blur-3xl"
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,0.35)_42%,rgba(2,6,23,0.92)_100%)]" />

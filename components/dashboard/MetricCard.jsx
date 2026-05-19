@@ -32,7 +32,7 @@ export default function MetricCard({ metric, index }) {
     >
       <GlassCard className="group relative overflow-hidden">
         <div
-          className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br blur-2xl ${
+          className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-linear-to-br blur-2xl ${
             tones[metric.tone]
           }`}
         />
@@ -49,7 +49,7 @@ export default function MetricCard({ metric, index }) {
           </div>
 
           <div
-            className={`grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br shadow-lg ${
+            className={`grid h-12 w-12 place-items-center rounded-2xl bg-linear-to-br shadow-lg ${
               tones[metric.tone]
             }`}
           >
@@ -62,7 +62,7 @@ export default function MetricCard({ metric, index }) {
             initial={{ width: 0 }}
             animate={{ width: `${60 + index * 10}%` }}
             transition={{ delay: 0.35 + index * 0.1, duration: 0.8 }}
-            className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-purple-500"
+            className="h-full rounded-full bg-linear-to-r from-cyan-400 to-purple-500"
           />
         </div>
       </GlassCard>

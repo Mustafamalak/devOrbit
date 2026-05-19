@@ -39,7 +39,7 @@ export default function ActivityFeed() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.08 }}
-              className="flex gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-cyan-300/30 hover:bg-white/[0.06]"
+              className="flex gap-4 rounded-3xl border border-white/10 bg-white/3 p-4 transition hover:border-cyan-300/30 hover:bg-white/6"
             >
               <div
                 className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl border ${colors[item.status]}`}

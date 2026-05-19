@@ -70,7 +70,7 @@ export default function FeatureSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: index * 0.06, duration: 0.45 }}
-              className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl transition hover:-translate-y-2 hover:border-cyan-300/30 hover:bg-white/[0.07]"
+              className="group relative overflow-hidden rounded-4xl border border-white/10 bg-white/4 p-6 backdrop-blur-xl transition hover:-translate-y-2 hover:border-cyan-300/30 hover:bg-white/7"
             >
               <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-cyan-500/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
 

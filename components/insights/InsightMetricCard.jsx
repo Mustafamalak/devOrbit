@@ -30,7 +30,7 @@ export default function InsightMetricCard({ card, index }) {
     >
       <GlassCard className="relative overflow-hidden">
         <div
-          className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br to-transparent blur-2xl ${
+          className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-linear-to-br to-transparent blur-2xl ${
             toneStyles[card.tone]
           }`}
         />
@@ -48,7 +48,7 @@ export default function InsightMetricCard({ card, index }) {
           </div>
 
           <div
-            className={`grid h-12 w-12 place-items-center rounded-2xl border bg-gradient-to-br to-transparent ${
+            className={`grid h-12 w-12 place-items-center rounded-2xl border bg-linear-to-br to-transparent ${
               toneStyles[card.tone]
             }`}
           >

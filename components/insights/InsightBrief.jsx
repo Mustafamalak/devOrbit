@@ -61,7 +61,7 @@ export default function InsightBrief() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.08 }}
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-4"
+                className="rounded-3xl border border-white/10 bg-white/4 p-4"
               >
                 <Icon size={19} className={point.tone} />
 

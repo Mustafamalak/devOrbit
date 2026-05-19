@@ -48,7 +48,7 @@ export default function DeploymentPanel() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.07 }}
-            className="rounded-3xl border border-white/10 bg-white/[0.04] p-4"
+            className="rounded-3xl border border-white/10 bg-white/4 p-4"
           >
             <div className="flex items-start justify-between gap-3">
               <div>

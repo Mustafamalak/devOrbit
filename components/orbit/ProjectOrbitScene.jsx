@@ -208,7 +208,7 @@ export default function ProjectOrbitScene() {
 
   return (
     <div className="grid min-h-[calc(100vh-8rem)] gap-6 xl:grid-cols-[1fr_380px]">
-      <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/80 shadow-2xl shadow-cyan-950/30">
+      <div className="relative overflow-hidden rounded-4xl border border-white/10 bg-slate-950/80 shadow-2xl shadow-cyan-950/30">
         <div className="absolute left-5 top-5 z-10 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium text-cyan-200 backdrop-blur-xl">
           Interactive 3D Project Universe
         </div>
@@ -226,7 +226,7 @@ export default function ProjectOrbitScene() {
         </Canvas>
       </div>
 
-      <aside className="rounded-[2rem] border border-white/10 bg-slate-950/75 p-5 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+      <aside className="rounded-4xl border border-white/10 bg-slate-950/75 p-5 shadow-2xl shadow-black/30 backdrop-blur-2xl">
         <div className="mb-5">
           <p className="text-sm text-cyan-300">Selected Project</p>
           <h2 className="mt-2 text-3xl font-black text-white">
@@ -235,7 +235,7 @@ export default function ProjectOrbitScene() {
           <p className="mt-1 text-sm text-slate-400">{selectedProject.type}</p>
         </div>
 
-        <div className="mb-5 rounded-3xl border border-white/10 bg-white/[0.04] p-4">
+        <div className="mb-5 rounded-3xl border border-white/10 bg-white/4 p-4">
           <div className="mb-3 flex items-center justify-between">
             <span className="text-sm text-slate-400">Health Score</span>
             <span className="font-bold text-cyan-300">
@@ -245,7 +245,7 @@ export default function ProjectOrbitScene() {
 
           <div className="h-2 overflow-hidden rounded-full bg-slate-800">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500"
+              className="h-full rounded-full bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500"
               style={{ width: `${selectedProject.health}%` }}
             />
           </div>
@@ -256,21 +256,21 @@ export default function ProjectOrbitScene() {
         </p>
 
         <div className="mb-5 grid grid-cols-3 gap-3">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
             <p className="text-xs text-slate-500">Tasks</p>
             <p className="mt-1 text-2xl font-black text-white">
               {selectedProject.tasks}
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
             <p className="text-xs text-slate-500">Bugs</p>
             <p className="mt-1 text-2xl font-black text-red-300">
               {selectedProject.bugs}
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
             <p className="text-xs text-slate-500">Commits</p>
             <p className="mt-1 text-2xl font-black text-emerald-300">
               {selectedProject.commits}

@@ -65,7 +65,7 @@ export default function ProjectsGrid() {
       </div>
 
       {filteredProjects.length === 0 ? (
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-10 text-center">
+        <div className="rounded-4xl border border-white/10 bg-white/4 p-10 text-center">
           <p className="text-lg font-semibold text-white">No systems found</p>
           <p className="mt-2 text-slate-400">
             Try changing the search term or status filter.

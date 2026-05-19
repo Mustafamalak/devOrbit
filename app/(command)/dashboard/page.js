@@ -1,4 +1,4 @@
-import MetricCard from "@/components/dashboard/MetricCard";
+import DashboardSpaceBackground from "@/components/dashboard/DashboardSpaceBackground";import MetricCard from "@/components/dashboard/MetricCard";
 import ProductivityChart from "@/components/dashboard/ProductivityChart";
 import ProjectHealth from "@/components/dashboard/ProjectHealth";
 import ActivityFeed from "@/components/dashboard/ActivityFeed";
@@ -8,6 +8,8 @@ import { metrics } from "@/data/mockData";
 export default function DashboardPage() {
   return (
     <div className="pb-10">
+      <DashboardSpaceBackground />
+
       <section className="mb-8">
         <p className="text-sm font-medium text-cyan-300">
           DevOrbit Command Center
@@ -15,7 +17,7 @@ export default function DashboardPage() {
 
         <div className="mt-2 flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <div>
-            <h1 className="text-4xl font-black tracking-tight text-white md:text-5xl">
+            <h1 className="glow-text text-4xl font-black tracking-tight text-white md:text-5xl">
               Welcome back,{" "}
               <span className="text-gradient">Mustafa</span>
             </h1>
@@ -27,9 +29,9 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-200">
-            System Sync: Live Mock Mode
-          </div>
+          <div className="rounded-2xl border border-pink-400/20 bg-pink-400/10 px-4 py-3 text-sm text-pink-200">
+  System Sync: Live Mock Mode
+</div>
         </div>
       </section>
 

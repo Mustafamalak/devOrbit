@@ -18,10 +18,10 @@ export default function KanbanColumn({ column, index }) {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08, duration: 0.45 }}
-      className="min-h-[620px] rounded-[2rem] border border-white/10 bg-slate-950/55 p-4 backdrop-blur-xl"
+      className="min-h-[620px] rounded-4xl border border-white/10 bg-slate-950/55 p-4 backdrop-blur-xl"
     >
       <div
-        className={`mb-4 rounded-3xl border bg-gradient-to-br to-transparent p-4 ${
+        className={`mb-4 rounded-3xl border bg-linear-to-br to-transparent p-4 ${
           accentStyles[column.accent]
         }`}
       >

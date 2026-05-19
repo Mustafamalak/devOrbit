@@ -7,7 +7,7 @@ const ProjectOrbitScene = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="grid min-h-[calc(100vh-8rem)] place-items-center rounded-[2rem] border border-white/10 bg-slate-950/80 text-white">
+      <div className="grid min-h-[calc(100vh-8rem)] place-items-center rounded-4xl border border-white/10 bg-slate-950/80 text-white">
         <div className="text-center">
           <div className="mx-auto mb-5 h-14 w-14 animate-spin rounded-full border-4 border-cyan-400/20 border-t-cyan-300" />
           <p className="text-sm font-medium text-cyan-300">

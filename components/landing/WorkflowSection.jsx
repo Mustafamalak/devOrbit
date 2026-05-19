@@ -48,7 +48,7 @@ export default function WorkflowSection() {
         </div>
 
         <div className="relative">
-          <div className="absolute left-8 top-10 bottom-10 w-px bg-gradient-to-b from-cyan-400/60 via-purple-400/40 to-transparent" />
+          <div className="absolute left-8 top-10 bottom-10 w-px bg-linear-to-b from-cyan-400/60 via-purple-400/40 to-transparent" />
 
           <div className="space-y-5">
             {steps.map((step, index) => {
@@ -61,7 +61,7 @@ export default function WorkflowSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ delay: index * 0.08, duration: 0.45 }}
-                  className="relative rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 pl-24 backdrop-blur-xl"
+                  className="relative rounded-4xl border border-white/10 bg-white/4 p-5 pl-24 backdrop-blur-xl"
                 >
                   <div className="absolute left-5 top-5 grid h-12 w-12 place-items-center rounded-2xl border border-cyan-400/20 bg-slate-950 text-cyan-300 shadow-lg shadow-cyan-500/10">
                     <Icon size={22} />

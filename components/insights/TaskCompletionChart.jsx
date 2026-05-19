@@ -52,7 +52,7 @@ export default function TaskCompletionChart() {
         {taskCompletionData.map((item, index) => (
           <div
             key={item.name}
-            className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs"
+            className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/4 px-3 py-2 text-xs"
           >
             <span className="text-slate-400">{item.name}</span>
             <span className="font-bold text-white">{item.value}%</span>

@@ -43,7 +43,7 @@ function getStatusLabel(status) {
 export default function ActivityTimeline() {
   return (
     <GlassCard className="relative overflow-hidden">
-      <div className="absolute left-9 top-24 bottom-8 w-px bg-gradient-to-b from-cyan-400/50 via-purple-400/30 to-transparent" />
+      <div className="absolute left-9 top-24 bottom-8 w-px bg-linear-to-b from-cyan-400/50 via-purple-400/30 to-transparent" />
 
       <div className="mb-7">
         <p className="text-sm text-cyan-300">Engineering Timeline</p>
@@ -71,7 +71,7 @@ export default function ActivityTimeline() {
                 <Icon size={18} />
               </div>
 
-              <div className="group rounded-3xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-cyan-300/30 hover:bg-white/[0.07]">
+              <div className="group rounded-3xl border border-white/10 bg-white/4 p-5 transition hover:border-cyan-300/30 hover:bg-white/[0.07]">
                 <div className="flex flex-col justify-between gap-3 md:flex-row md:items-start">
                   <div>
                     <h3 className="text-lg font-bold text-white">

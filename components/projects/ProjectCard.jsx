@@ -99,13 +99,13 @@ export default function ProjectCard({ project, index }) {
                 initial={{ width: 0 }}
                 animate={{ width: `${project.progress}%` }}
                 transition={{ delay: 0.2 + index * 0.06, duration: 0.8 }}
-                className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500"
+                className="h-full rounded-full bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500"
               />
             </div>
           </div>
 
           <div className="mb-5 grid grid-cols-3 gap-3">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
+            <div className="rounded-2xl border border-white/10 bg-white/4 p-3">
               <ListChecks size={16} className="mb-2 text-cyan-300" />
               <p className="text-xs text-slate-500">Tasks</p>
               <p className="mt-1 text-lg font-black text-white">
@@ -113,7 +113,7 @@ export default function ProjectCard({ project, index }) {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
+            <div className="rounded-2xl border border-white/10 bg-white/4 p-3">
               <Bug size={16} className="mb-2 text-red-300" />
               <p className="text-xs text-slate-500">Bugs</p>
               <p className="mt-1 text-lg font-black text-white">
@@ -121,7 +121,7 @@ export default function ProjectCard({ project, index }) {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
+            <div className="rounded-2xl border border-white/10 bg-white/4 p-3">
               <GitCommit size={16} className="mb-2 text-emerald-300" />
               <p className="text-xs text-slate-500">Commits</p>
               <p className="mt-1 text-lg font-black text-white">

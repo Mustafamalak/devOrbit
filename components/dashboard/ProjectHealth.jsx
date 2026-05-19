@@ -38,7 +38,7 @@ export default function ProjectHealth() {
             initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.08 }}
-            className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-cyan-300/30 hover:bg-white/[0.06]"
+            className="rounded-3xl border border-white/10 bg-white/3 p-4 transition hover:border-cyan-300/30 hover:bg-white/6"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -81,7 +81,7 @@ export default function ProjectHealth() {
                   initial={{ width: 0 }}
                   animate={{ width: `${project.health}%` }}
                   transition={{ duration: 0.8, delay: index * 0.12 }}
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500"
+                  className="h-full rounded-full bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500"
                 />
               </div>
             </div>

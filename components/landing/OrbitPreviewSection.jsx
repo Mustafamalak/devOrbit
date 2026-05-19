@@ -36,7 +36,7 @@ export default function OrbitPreviewSection() {
               ].map(([label, value, Icon]) => (
                 <div
                   key={label}
-                  className="rounded-3xl border border-white/10 bg-white/[0.04] p-4"
+                  className="rounded-3xl border border-white/10 bg-white/4 p-4"
                 >
                   <Icon size={19} className="mb-3 text-cyan-300" />
                   <p className="text-xs text-slate-500">{label}</p>
@@ -53,7 +53,7 @@ export default function OrbitPreviewSection() {
             </div>
           </div>
 
-          <div className="relative grid min-h-[420px] place-items-center rounded-[2rem] border border-white/10 bg-black/30">
+          <div className="relative grid min-h-[420px] place-items-center rounded-4xl border border-white/10 bg-black/30">
             <div className="absolute inset-0 grid-bg opacity-25" />
 
             <div className="relative grid h-32 w-32 place-items-center rounded-full border border-cyan-400/30 bg-cyan-400/10 shadow-2xl shadow-cyan-500/30">

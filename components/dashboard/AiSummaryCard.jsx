@@ -40,7 +40,7 @@ export default function AiSummaryCard() {
             <motion.div
               key={label}
               whileHover={{ y: -4 }}
-              className="rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+              className="rounded-2xl border border-white/10 bg-white/4 p-4"
             >
               <Icon size={17} className="mb-3 text-cyan-300" />
               <p className="text-xs text-slate-500">{label}</p>

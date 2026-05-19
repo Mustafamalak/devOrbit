@@ -74,7 +74,7 @@ export default function HeroSection() {
         ].map(([title, text, Icon]) => (
           <div
             key={title}
-            className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-left backdrop-blur-xl transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
+            className="rounded-3xl border border-white/10 bg-white/4 p-5 text-left backdrop-blur-xl transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
           >
             <Icon size={22} className="mb-4 text-cyan-300" />
             <h3 className="font-bold text-white">{title}</h3>
