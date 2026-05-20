@@ -11,7 +11,6 @@ import {
   Sparkles,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { orbitProjects } from "@/data/mockData";
 
 function OrbitRing({ radius }) {
   const points = useMemo(() => {
@@ -68,7 +67,12 @@ function DeveloperCore() {
 
         <mesh scale={1.28}>
           <icosahedronGeometry args={[1.05, 2]} />
-          <meshBasicMaterial color="#ff8a3d" transparent opacity={0.09} wireframe />
+          <meshBasicMaterial
+            color="#ff8a3d"
+            transparent
+            opacity={0.09}
+            wireframe
+          />
         </mesh>
 
         <Text
@@ -93,11 +97,11 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
   const planetRef = useRef();
 
   const startAngle = useMemo(() => index * 1.35, [index]);
-  const isSelected = selectedProject?.id === project.id;
+  const isSelected = selectedProject?._id === project._id;
 
   useFrame(({ clock }, delta) => {
     const elapsed = clock.getElapsedTime();
-    const angle = elapsed * project.speed + startAngle;
+    const angle = elapsed * project.orbitSpeed + startAngle;
 
     if (groupRef.current) {
       groupRef.current.position.x = Math.cos(angle) * project.orbitRadius;
@@ -121,10 +125,10 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
         }}
         scale={isSelected ? 1.28 : 1}
       >
-        <sphereGeometry args={[project.size, 48, 48]} />
+        <sphereGeometry args={[project.orbitSize, 48, 48]} />
         <meshStandardMaterial
-          color={project.color}
-          emissive={project.color}
+          color={project.orbitColor}
+          emissive={project.orbitColor}
           emissiveIntensity={isSelected ? 0.85 : 0.42}
           roughness={0.25}
           metalness={0.28}
@@ -132,16 +136,16 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
       </mesh>
 
       <mesh scale={isSelected ? 1.65 : 1.3}>
-        <sphereGeometry args={[project.size, 32, 32]} />
+        <sphereGeometry args={[project.orbitSize, 32, 32]} />
         <meshBasicMaterial
-          color={project.color}
+          color={project.orbitColor}
           transparent
           opacity={isSelected ? 0.2 : 0.08}
         />
       </mesh>
 
       <Html
-        position={[0, project.size + 0.42, 0]}
+        position={[0, project.orbitSize + 0.42, 0]}
         center
         distanceFactor={8}
         style={{ pointerEvents: "none" }}
@@ -151,7 +155,7 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
         </div>
       </Html>
 
-      {project.bugs > 3 && (
+      {Number(project.bugsCount || 0) > 3 && (
         <Sparkles
           count={12}
           scale={[1.4, 1.4, 1.4]}
@@ -164,7 +168,7 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
   );
 }
 
-function OrbitUniverse({ selectedProject, setSelectedProject }) {
+function OrbitUniverse({ projects, selectedProject, setSelectedProject }) {
   return (
     <>
       <ambientLight intensity={0.72} />
@@ -193,13 +197,13 @@ function OrbitUniverse({ selectedProject, setSelectedProject }) {
 
       <DeveloperCore />
 
-      {orbitProjects.map((project) => (
-        <OrbitRing key={`ring-${project.id}`} radius={project.orbitRadius} />
+      {projects.map((project) => (
+        <OrbitRing key={`ring-${project._id}`} radius={project.orbitRadius} />
       ))}
 
-      {orbitProjects.map((project, index) => (
+      {projects.map((project, index) => (
         <ProjectPlanet
-          key={project.id}
+          key={project._id}
           project={project}
           index={index}
           selectedProject={selectedProject}
@@ -235,24 +239,48 @@ function getStatusStyle(status) {
   return "border-rose-400/20 bg-rose-400/10 text-rose-300";
 }
 
-export default function ProjectOrbitScene() {
-  const [selectedProject, setSelectedProject] = useState(orbitProjects[0]);
+export default function ProjectOrbitScene({ projects }) {
+  const [selectedProject, setSelectedProject] = useState(projects[0] || null);
+
+  if (!projects || projects.length === 0) {
+    return (
+      <div className="premium-card grid min-h-[28rem] place-items-center rounded-[2rem] p-10 text-center">
+        <div>
+          <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-3xl border border-pink-400/20 bg-pink-400/10 text-pink-300">
+            3D
+          </div>
+
+          <h2 className="text-3xl font-black text-white">
+            No project planets yet
+          </h2>
+
+          <p className="mx-auto mt-3 max-w-xl text-[#a89bb8]">
+            Create projects from the Projects page. Each project will become a
+            live planet in your personal DevOrbit universe.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const activeProject = selectedProject || projects[0];
 
   return (
     <div className="grid min-h-[calc(100vh-8rem)] gap-6 xl:grid-cols-[1fr_380px]">
       <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0614]/82 shadow-2xl shadow-pink-950/30">
         <div className="absolute left-5 top-5 z-10 rounded-full border border-pink-400/20 bg-pink-400/10 px-4 py-2 text-xs font-medium text-pink-200 backdrop-blur-xl">
-          Interactive 3D Project Universe
+          MongoDB Project Universe
         </div>
 
         <div className="absolute bottom-5 left-5 z-10 max-w-md rounded-3xl border border-white/10 bg-[#0b0614]/70 p-4 text-sm text-[#cfc3dd] backdrop-blur-xl">
           Drag to rotate. Scroll to zoom. Click any project planet to inspect its
-          workflow health, sprint status, task load, and stack.
+          health, sprint status, task load, bugs, commits, and stack.
         </div>
 
         <Canvas camera={{ position: [0, 5.3, 8.6], fov: 48 }}>
           <OrbitUniverse
-            selectedProject={selectedProject}
+            projects={projects}
+            selectedProject={activeProject}
             setSelectedProject={setSelectedProject}
           />
         </Canvas>
@@ -261,77 +289,89 @@ export default function ProjectOrbitScene() {
       <aside className="premium-card rounded-[2rem] p-5">
         <div className="mb-5">
           <p className="text-sm text-pink-300">Selected Project</p>
+
           <h2 className="mt-2 text-3xl font-black text-white">
-            {selectedProject.name}
+            {activeProject.name}
           </h2>
-          <p className="mt-1 text-sm text-[#a89bb8]">{selectedProject.type}</p>
+
+          <p className="mt-1 text-sm text-[#a89bb8]">
+            {activeProject.category}
+          </p>
         </div>
 
         <div className="mb-5 rounded-3xl border border-white/10 bg-white/[0.045] p-4">
           <div className="mb-3 flex items-center justify-between">
             <span className="text-sm text-[#a89bb8]">Health Score</span>
             <span className="font-bold text-pink-300">
-              {selectedProject.health}%
+              {activeProject.health}%
             </span>
           </div>
 
           <div className="h-2 overflow-hidden rounded-full bg-[#140c23]">
             <div
               className="h-full rounded-full bg-gradient-to-r from-pink-400 via-orange-400 to-violet-600"
-              style={{ width: `${selectedProject.health}%` }}
+              style={{ width: `${activeProject.health}%` }}
             />
           </div>
         </div>
 
         <p className="mb-5 text-sm leading-7 text-[#cfc3dd]">
-          {selectedProject.description}
+          {activeProject.description || "No description provided."}
         </p>
 
         <div className="mb-5 grid grid-cols-3 gap-3">
           <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
             <p className="text-xs text-[#a89bb8]/70">Tasks</p>
             <p className="mt-1 text-2xl font-black text-white">
-              {selectedProject.tasks}
+              {activeProject.tasksCount || 0}
             </p>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
             <p className="text-xs text-[#a89bb8]/70">Bugs</p>
             <p className="mt-1 text-2xl font-black text-rose-300">
-              {selectedProject.bugs}
+              {activeProject.bugsCount || 0}
             </p>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
             <p className="text-xs text-[#a89bb8]/70">Commits</p>
             <p className="mt-1 text-2xl font-black text-emerald-300">
-              {selectedProject.commits}
+              {activeProject.commitsCount || 0}
             </p>
           </div>
         </div>
 
         <div className="mb-5">
           <p className="mb-3 text-sm font-medium text-[#cfc3dd]">Stack</p>
+
           <div className="flex flex-wrap gap-2">
-            {selectedProject.stack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-1 text-xs text-pink-200"
-              >
-                {tech}
+            {(activeProject.stack || []).length === 0 ? (
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#a89bb8]">
+                No stack added
               </span>
-            ))}
+            ) : (
+              activeProject.stack.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-1 text-xs text-pink-200"
+                >
+                  {tech}
+                </span>
+              ))
+            )}
           </div>
         </div>
 
-        <div className={`rounded-3xl border p-4 ${getStatusStyle(selectedProject.status)}`}>
+        <div className={`rounded-3xl border p-4 ${getStatusStyle(activeProject.status)}`}>
           <p className="text-sm font-semibold">Orbit Intelligence</p>
+
           <p className="mt-2 text-sm leading-6 text-[#cfc3dd]">
-            {selectedProject.status === "Healthy"
+            {activeProject.status === "Healthy"
               ? "This project is stable and ready for feature expansion."
-              : selectedProject.status === "Warning"
+              : activeProject.status === "Warning"
                 ? "This project needs focused sprint cleanup before new feature work."
-                : selectedProject.status === "Prototype"
+                : activeProject.status === "Prototype"
                   ? "This project is in early orbit. Validate workflow before scaling."
                   : "This project requires review. Resolve bug clusters and reduce open tasks first."}
           </p>

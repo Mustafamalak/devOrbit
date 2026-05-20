@@ -13,9 +13,9 @@ export default function OrbitPage() {
         </h1>
 
         <p className="mt-3 max-w-3xl text-[#a89bb8]">
-          Projects are visualized as living systems around your developer core.
-          Health, bugs, task load, and sprint velocity influence how each project
-          appears inside the command universe.
+          Projects from your MongoDB workspace are visualized as living planets
+          around your developer core. Project health, bugs, task load, and stack
+          data shape the orbit intelligence panel.
         </p>
       </section>
 
