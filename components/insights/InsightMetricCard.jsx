@@ -2,25 +2,27 @@
 
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
-import { Activity, Bug, Clock3, Gauge } from "lucide-react";
+import { Activity, Bug, CheckCircle2, Clock3, Gauge } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
 
 const iconMap = {
-  "Productivity Score": Gauge,
-  "Focus Hours": Clock3,
-  "Task Closure": Activity,
-  "Bug Pressure": Bug,
+  productivity: Gauge,
+  focus: Clock3,
+  closure: CheckCircle2,
+  bugs: Bug,
+  activity: Activity,
 };
 
 const toneStyles = {
-  cyan: "from-pink-400/24 text-pink-300 border-pink-400/20",
-  purple: "from-violet-400/24 text-violet-300 border-violet-400/20",
+  pink: "from-pink-400/24 text-pink-300 border-pink-400/20",
+  violet: "from-violet-400/24 text-violet-300 border-violet-400/20",
   emerald: "from-emerald-400/24 text-emerald-300 border-emerald-400/20",
-  red: "from-rose-400/24 text-rose-300 border-rose-400/20",
+  rose: "from-rose-400/24 text-rose-300 border-rose-400/20",
+  orange: "from-orange-400/24 text-orange-300 border-orange-400/20",
 };
 
 export default function InsightMetricCard({ card, index }) {
-  const Icon = iconMap[card.label];
+  const Icon = iconMap[card.icon] || Gauge;
 
   return (
     <motion.div
@@ -34,8 +36,6 @@ export default function InsightMetricCard({ card, index }) {
           className={`absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br to-transparent blur-2xl ${toneStyles[card.tone]
             }`}
         />
-
-        <div className="absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-orange-500/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
 
         <div className="relative flex items-start justify-between gap-4">
           <div>

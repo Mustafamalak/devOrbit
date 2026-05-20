@@ -10,20 +10,19 @@ import {
   YAxis,
 } from "recharts";
 import GlassCard from "@/components/ui/GlassCard";
-import { focusHoursData } from "@/data/mockData";
 
-export default function FocusHoursChart() {
+export default function FocusHoursChart({ data }) {
   return (
     <GlassCard className="h-[380px]">
       <div className="mb-5">
-        <p className="text-sm text-emerald-300">Deep Work Analytics</p>
+        <p className="text-sm text-emerald-300">Activity Analytics</p>
         <h2 className="mt-1 text-2xl font-black text-white">
-          Focus Hours
+          Weekly Activity Pulse
         </h2>
       </div>
 
       <ResponsiveContainer width="100%" height="78%">
-        <LineChart data={focusHoursData}>
+        <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
           <XAxis dataKey="day" stroke="#a89bb8" />
           <YAxis stroke="#a89bb8" />
@@ -39,7 +38,7 @@ export default function FocusHoursChart() {
 
           <Line
             type="monotone"
-            dataKey="hours"
+            dataKey="events"
             stroke="#34d399"
             strokeWidth={4}
             dot={{ r: 5, fill: "#34d399" }}

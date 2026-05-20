@@ -10,34 +10,33 @@ import {
   YAxis,
 } from "recharts";
 import GlassCard from "@/components/ui/GlassCard";
-import { bugTrendData } from "@/data/mockData";
 
-export default function BugTrendChart() {
+export default function BugTrendChart({ data }) {
   return (
     <GlassCard className="h-[380px]">
       <div className="mb-5">
         <p className="text-sm text-rose-300">Quality Signal</p>
         <h2 className="mt-1 text-2xl font-black text-white">
-          Bug Trend vs Resolution
+          Bugs vs Project Health
         </h2>
       </div>
 
       <ResponsiveContainer width="100%" height="78%">
-        <AreaChart data={bugTrendData}>
+        <AreaChart data={data}>
           <defs>
-            <linearGradient id="bugsEmber" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="bugsEmberDynamic" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#fb7185" stopOpacity={0.35} />
               <stop offset="95%" stopColor="#fb7185" stopOpacity={0} />
             </linearGradient>
 
-            <linearGradient id="resolvedEmber" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="healthEmberDynamic" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#34d399" stopOpacity={0.35} />
               <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
             </linearGradient>
           </defs>
 
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-          <XAxis dataKey="sprint" stroke="#a89bb8" />
+          <XAxis dataKey="name" stroke="#a89bb8" />
           <YAxis stroke="#a89bb8" />
           <Tooltip
             contentStyle={{
@@ -54,15 +53,15 @@ export default function BugTrendChart() {
             dataKey="bugs"
             stroke="#fb7185"
             strokeWidth={3}
-            fill="url(#bugsEmber)"
+            fill="url(#bugsEmberDynamic)"
           />
 
           <Area
             type="monotone"
-            dataKey="resolved"
+            dataKey="health"
             stroke="#34d399"
             strokeWidth={3}
-            fill="url(#resolvedEmber)"
+            fill="url(#healthEmberDynamic)"
           />
         </AreaChart>
       </ResponsiveContainer>

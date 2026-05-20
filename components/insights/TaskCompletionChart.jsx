@@ -1,18 +1,11 @@
 "use client";
 
-import {
-  Cell,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import GlassCard from "@/components/ui/GlassCard";
-import { taskCompletionData } from "@/data/mockData";
 
 const COLORS = ["#ff4ecd", "#ff8a3d", "#7c3aed", "#34d399"];
 
-export default function TaskCompletionChart() {
+export default function TaskCompletionChart({ data }) {
   return (
     <GlassCard className="h-[380px]">
       <div className="mb-5">
@@ -25,14 +18,14 @@ export default function TaskCompletionChart() {
       <ResponsiveContainer width="100%" height="62%">
         <PieChart>
           <Pie
-            data={taskCompletionData}
+            data={data}
             dataKey="value"
             nameKey="name"
             innerRadius={62}
             outerRadius={100}
             paddingAngle={5}
           >
-            {taskCompletionData.map((entry, index) => (
+            {data.map((entry, index) => (
               <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
@@ -50,13 +43,13 @@ export default function TaskCompletionChart() {
       </ResponsiveContainer>
 
       <div className="grid grid-cols-2 gap-2">
-        {taskCompletionData.map((item) => (
+        {data.map((item) => (
           <div
             key={item.name}
             className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.045] px-3 py-2 text-xs"
           >
             <span className="text-[#a89bb8]">{item.name}</span>
-            <span className="font-bold text-white">{item.value}%</span>
+            <span className="font-bold text-white">{item.value}</span>
           </div>
         ))}
       </div>

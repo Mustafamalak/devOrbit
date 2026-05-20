@@ -4,24 +4,57 @@ import { motion } from "framer-motion";
 import { Bot, BrainCircuit, CheckCircle2, TriangleAlert } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
 
-export default function InsightBrief() {
+export default function InsightBrief({ projects, tasks, activities }) {
+  const criticalProjects = projects.filter(
+    (project) => project.status === "Critical"
+  ).length;
+
+  const warningProjects = projects.filter(
+    (project) => project.status === "Warning"
+  ).length;
+
+  const doneTasks = tasks.filter((task) => task.status === "done").length;
+  const pendingTasks = tasks.length - doneTasks;
+
+  const strongestSignal =
+    projects.length > 0
+      ? `${projects.length} project system${projects.length > 1 ? "s" : ""
+      } actively tracked in MongoDB.`
+      : "No projects tracked yet. Create projects to generate better intelligence.";
+
+  const riskSignal =
+    criticalProjects > 0
+      ? `${criticalProjects} critical project detected. Resolve bugs and blockers first.`
+      : warningProjects > 0
+        ? `${warningProjects} warning-level project detected. Review sprint risk.`
+        : "No major project risk detected from current data.";
+
+  const suggestedAction =
+    pendingTasks > 0
+      ? `Complete or review ${pendingTasks} pending task${pendingTasks > 1 ? "s" : ""
+      } to improve sprint closure.`
+      : "Add tasks and activity events to build a stronger productivity signal.";
+
   const points = [
     {
       icon: CheckCircle2,
       label: "Strongest Signal",
-      text: "Commit velocity and task closure improved compared to the previous sprint.",
+      text: strongestSignal,
       tone: "text-emerald-300",
     },
     {
       icon: TriangleAlert,
       label: "Risk Area",
-      text: "Review-stage delay is increasing. Merge or reject pending items faster.",
-      tone: "text-orange-300",
+      text: riskSignal,
+      tone:
+        criticalProjects > 0 || warningProjects > 0
+          ? "text-orange-300"
+          : "text-emerald-300",
     },
     {
       icon: BrainCircuit,
       label: "Suggested Action",
-      text: "Focus on deployment polish, responsive QA, and final landing page conversion.",
+      text: suggestedAction,
       tone: "text-pink-300",
     },
   ];
@@ -37,7 +70,7 @@ export default function InsightBrief() {
           <div>
             <p className="text-sm text-pink-300">AI Productivity Brief</p>
             <h2 className="mt-1 text-2xl font-black text-white">
-              Sprint Intelligence Summary
+              MongoDB Sprint Intelligence
             </h2>
           </div>
 
@@ -47,10 +80,11 @@ export default function InsightBrief() {
         </div>
 
         <p className="text-sm leading-7 text-[#cfc3dd]">
-          DevOrbit is currently trending toward deployment readiness. The core
-          frontend architecture is stable, visual systems are complete, and the
-          remaining bottleneck is polish across responsiveness, SEO, and final
-          landing-page storytelling.
+          DevOrbit analyzed {projects.length} project
+          {projects.length !== 1 ? "s" : ""}, {tasks.length} task
+          {tasks.length !== 1 ? "s" : ""}, and {activities.length} activity
+          event{activities.length !== 1 ? "s" : ""} from your MongoDB
+          workspace.
         </p>
 
         <div className="mt-6 grid gap-3 lg:grid-cols-3">
