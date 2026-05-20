@@ -1,4 +1,5 @@
 import "./globals.css";
+import CursorGlow from "@/components/ui/CursorGlow";
 
 export const metadata = {
   title: {
@@ -40,7 +41,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <CursorGlow />
+        <div className="relative z-10">{children}</div>
+      </body>
     </html>
   );
 }

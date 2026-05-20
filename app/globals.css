@@ -137,12 +137,10 @@ canvas {
   inset: -1px;
   z-index: -1;
   border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 78, 205, 0.55),
-    rgba(255, 138, 61, 0.4),
-    rgba(124, 58, 237, 0.5)
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 78, 205, 0.55),
+      rgba(255, 138, 61, 0.4),
+      rgba(124, 58, 237, 0.5));
   opacity: 0;
   transition: opacity 250ms ease;
 }
@@ -162,14 +160,12 @@ canvas {
   inset: -1px;
   z-index: -1;
   border-radius: inherit;
-  background: linear-gradient(
-    120deg,
-    #ff4ecd,
-    #ff8a3d,
-    #7c3aed,
-    #34d399,
-    #ff4ecd
-  );
+  background: linear-gradient(120deg,
+      #ff4ecd,
+      #ff8a3d,
+      #7c3aed,
+      #34d399,
+      #ff4ecd);
   background-size: 300% 300%;
   animation: gradientMove 7s ease infinite;
   opacity: 0.55;
@@ -225,12 +221,10 @@ canvas {
   position: absolute;
   inset: 0;
   transform: translateY(-100%);
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255, 78, 205, 0.16),
-    transparent
-  );
+  background: linear-gradient(to bottom,
+      transparent,
+      rgba(255, 78, 205, 0.16),
+      transparent);
   animation: scanlineMove 5s linear infinite;
   pointer-events: none;
 }
@@ -246,6 +240,7 @@ canvas {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -253,5 +248,43 @@ canvas {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 78, 205, 0.13), transparent 24rem),
+    radial-gradient(circle at 82% 18%, rgba(255, 138, 61, 0.1), transparent 26rem),
+    radial-gradient(circle at 50% 84%, rgba(124, 58, 237, 0.12), transparent 28rem);
+  animation: backgroundDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundDrift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.8;
+  }
+
+  to {
+    transform: translate3d(2rem, -1.5rem, 0) scale(1.05);
+    opacity: 1;
   }
 }

@@ -26,7 +26,7 @@ export default function TechStackSection() {
           <span className="text-gradient">frontend engineering stack</span>
         </h2>
 
-        <p className="mt-5 text-slate-400">
+        <p className="mt-5 text-[#a89bb8]">
           The project focuses on production-grade frontend skills: routing,
           reusable components, animations, charts, 3D scenes, responsive layouts,
           visual hierarchy, and deployment readiness.
@@ -37,13 +37,14 @@ export default function TechStackSection() {
         {stack.map((tech, index) => (
           <motion.div
             key={tech}
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ delay: index * 0.04, duration: 0.35 }}
-            className="rounded-3xl border border-white/10 bg-white/4 p-5 text-center font-semibold text-white backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-300/30 hover:text-cyan-200"
+            whileHover={{ y: -7, scale: 1.035 }}
+            className="premium-card ember-border rounded-3xl p-5 text-center font-semibold text-white transition hover:text-pink-200"
           >
-            {tech}
+            <span className="text-gradient">{tech}</span>
           </motion.div>
         ))}
       </div>

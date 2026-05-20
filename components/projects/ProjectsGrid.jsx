@@ -32,8 +32,8 @@ export default function ProjectsGrid() {
     <div>
       <div className="mb-6 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
-            <Filter size={16} />
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-[#cfc3dd]">
+            <Filter size={16} className="text-pink-300" />
             Filter Systems
           </div>
 
@@ -44,8 +44,8 @@ export default function ProjectsGrid() {
               className={cn(
                 "rounded-full border px-4 py-2 text-sm font-medium transition",
                 activeFilter === filter
-                  ? "border-cyan-300/40 bg-cyan-400/10 text-cyan-200 shadow-lg shadow-cyan-500/10"
-                  : "border-white/10 bg-white/5 text-slate-400 hover:border-cyan-300/30 hover:text-white"
+                  ? "border-pink-300/40 bg-pink-400/10 text-pink-200 shadow-lg shadow-pink-500/10"
+                  : "border-white/10 bg-white/5 text-[#a89bb8] hover:border-pink-300/30 hover:text-white"
               )}
             >
               {filter}
@@ -53,21 +53,21 @@ export default function ProjectsGrid() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-slate-400 xl:w-80">
-          <Search size={18} />
+        <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-[#a89bb8] transition focus-within:border-pink-300/30 xl:w-80">
+          <Search size={18} className="text-pink-300" />
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            className="w-full bg-transparent text-sm text-slate-200 outline-none placeholder:text-slate-500"
+            className="w-full bg-transparent text-sm text-white outline-none placeholder:text-[#a89bb8]/60"
             placeholder="Search projects or stack..."
           />
         </div>
       </div>
 
       {filteredProjects.length === 0 ? (
-        <div className="rounded-4xl border border-white/10 bg-white/4 p-10 text-center">
+        <div className="premium-card rounded-[2rem] p-10 text-center">
           <p className="text-lg font-semibold text-white">No systems found</p>
-          <p className="mt-2 text-slate-400">
+          <p className="mt-2 text-[#a89bb8]">
             Try changing the search term or status filter.
           </p>
         </div>

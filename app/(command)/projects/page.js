@@ -4,17 +4,17 @@ export default function ProjectsPage() {
   return (
     <div className="pb-10">
       <section className="mb-7">
-        <p className="text-sm font-medium text-cyan-300">
+        <p className="text-sm font-medium text-pink-300">
           Project Systems
         </p>
 
         <div className="mt-2 flex flex-col justify-between gap-4 xl:flex-row xl:items-end">
           <div>
-            <h1 className="text-4xl font-black tracking-tight text-white md:text-5xl">
+            <h1 className="glow-text text-4xl font-black tracking-tight text-white md:text-5xl">
               Active Project <span className="text-gradient">Fleet</span>
             </h1>
 
-            <p className="mt-3 max-w-3xl text-slate-400">
+            <p className="mt-3 max-w-3xl text-[#a89bb8]">
               Track every project like a living system. Monitor health,
               priority, build progress, bug pressure, stack composition, and
               delivery readiness from one premium command interface.
