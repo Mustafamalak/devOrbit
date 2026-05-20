@@ -17,9 +17,20 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    process.env.PRODUCTION_CLIENT_URL,
+].filter(Boolean);
+
 app.use(
     cors({
-        origin: process.env.CLIENT_URL,
+        origin(origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+
+            return callback(new Error("Not allowed by CORS"));
+        },
         credentials: true,
     })
 );
@@ -40,6 +51,8 @@ app.get("/", (req, res) => {
     res.json({
         success: true,
         message: "DevOrbit API is running",
+        service: "DevOrbit Backend",
+        version: "1.0.0",
     });
 });
 
