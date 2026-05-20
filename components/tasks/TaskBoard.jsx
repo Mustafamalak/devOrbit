@@ -71,6 +71,32 @@ export default function TaskBoard() {
     setTasks((current) => [task, ...current]);
   }
 
+  async function handleStatusChange(task, status) {
+    try {
+      const data = await taskApi.updateTask(task._id, { status });
+
+      setTasks((current) =>
+        current.map((item) => (item._id === task._id ? data.task : item))
+      );
+    } catch (err) {
+      alert(err.message || "Failed to update task");
+    }
+  }
+
+  async function handleDelete(task) {
+    const confirmed = window.confirm(`Delete task "${task.title}"?`);
+
+    if (!confirmed) return;
+
+    try {
+      await taskApi.deleteTask(task._id);
+
+      setTasks((current) => current.filter((item) => item._id !== task._id));
+    } catch (err) {
+      alert(err.message || "Failed to delete task");
+    }
+  }
+
   const normalizedTasks = useMemo(() => {
     return tasks.map(normalizeTask);
   }, [tasks]);
@@ -141,6 +167,8 @@ export default function TaskBoard() {
               key={column.id}
               column={column}
               tasks={tasksByColumn[column.id] || []}
+              onStatusChange={handleStatusChange}
+              onDelete={handleDelete}
             />
           ))}
         </div>

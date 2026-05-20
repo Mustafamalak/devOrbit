@@ -1,5 +1,6 @@
 import Project from "../models/Project.js";
 import Activity from "../models/Activity.js";
+import Task from "../models/Task.js";
 
 function buildOrbitFields(index = 0) {
     const colors = ["#ff4ecd", "#7c3aed", "#fb7185", "#34d399", "#ff8a3d"];
@@ -162,6 +163,16 @@ export async function deleteProject(req, res) {
                 message: "Project not found",
             });
         }
+
+        await Task.deleteMany({
+            project: project._id,
+            user: req.user._id,
+        });
+
+        await Activity.deleteMany({
+            project: project._id,
+            user: req.user._id,
+        });
 
         return res.status(200).json({
             success: true,

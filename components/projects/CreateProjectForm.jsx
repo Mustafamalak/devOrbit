@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Loader2, Plus, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Loader2, Plus, Save, X } from "lucide-react";
 import { projectApi } from "@/lib/api";
 
 const initialForm = {
@@ -18,10 +18,43 @@ const initialForm = {
     commitsCount: 0,
 };
 
-export default function CreateProjectForm({ open, onClose, onCreated }) {
+function buildFormFromProject(project) {
+    if (!project) return initialForm;
+
+    return {
+        name: project.name || "",
+        category: project.category || "Developer Project",
+        description: project.description || "",
+        status: project.status || "Prototype",
+        priority: project.priority || "Medium",
+        health: project.health ?? 70,
+        progress: project.progress ?? 0,
+        deadline: project.deadline || "No deadline",
+        stack: Array.isArray(project.stack) ? project.stack.join(", ") : "",
+        bugsCount: project.bugsCount ?? 0,
+        commitsCount: project.commitsCount ?? 0,
+    };
+}
+
+export default function CreateProjectForm({
+    open,
+    onClose,
+    onCreated,
+    onUpdated,
+    editProject = null,
+}) {
+    const isEditMode = Boolean(editProject);
+
     const [form, setForm] = useState(initialForm);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (open) {
+            setForm(buildFormFromProject(editProject));
+            setError("");
+        }
+    }, [open, editProject]);
 
     if (!open) return null;
 
@@ -52,13 +85,18 @@ export default function CreateProjectForm({ open, onClose, onCreated }) {
                     .filter(Boolean),
             };
 
-            const data = await projectApi.createProject(payload);
+            if (isEditMode) {
+                const data = await projectApi.updateProject(editProject._id, payload);
+                onUpdated?.(data.project);
+            } else {
+                const data = await projectApi.createProject(payload);
+                onCreated?.(data.project);
+            }
 
-            onCreated(data.project);
             setForm(initialForm);
             onClose();
         } catch (err) {
-            setError(err.message || "Failed to create project");
+            setError(err.message || "Failed to save project");
         } finally {
             setLoading(false);
         }
@@ -73,16 +111,17 @@ export default function CreateProjectForm({ open, onClose, onCreated }) {
                 <div className="mb-6 flex items-start justify-between gap-4">
                     <div>
                         <div className="mb-4 grid h-12 w-12 place-items-center rounded-2xl border border-pink-400/20 bg-pink-400/10 text-pink-300">
-                            <Plus size={22} />
+                            {isEditMode ? <Save size={22} /> : <Plus size={22} />}
                         </div>
 
                         <h2 className="text-2xl font-black text-white">
-                            Add Project System
+                            {isEditMode ? "Edit Project System" : "Add Project System"}
                         </h2>
 
                         <p className="mt-2 text-sm text-[#a89bb8]">
-                            Create a user-specific project that will appear in your project
-                            fleet and later inside your orbit map.
+                            {isEditMode
+                                ? "Update this MongoDB-backed project system."
+                                : "Create a user-specific project that appears in your project fleet and orbit map."}
                         </p>
                     </div>
 
@@ -257,9 +296,10 @@ export default function CreateProjectForm({ open, onClose, onCreated }) {
                         className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-pink-400 via-orange-400 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition duration-700 group-hover:translate-x-full" />
+
                         <span className="relative z-10 inline-flex items-center gap-2">
                             {loading && <Loader2 size={17} className="animate-spin" />}
-                            Create Project
+                            {isEditMode ? "Save Changes" : "Create Project"}
                         </span>
                     </button>
                 </div>

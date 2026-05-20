@@ -1,4 +1,5 @@
 import ProjectsGrid from "@/components/projects/ProjectsGrid";
+import GitHubConnectCard from "@/components/github/GitHubConnectCard";
 
 export default function ProjectsPage() {
   return (
@@ -25,6 +26,10 @@ export default function ProjectsPage() {
             MongoDB connected
           </div>
         </div>
+      </section>
+
+      <section className="mb-6">
+        <GitHubConnectCard />
       </section>
 
       <ProjectsGrid />

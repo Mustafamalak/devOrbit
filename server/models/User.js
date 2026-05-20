@@ -47,6 +47,22 @@ const userSchema = new mongoose.Schema(
             type: String,
             default: "",
         },
+
+        githubProfileUrl: {
+            type: String,
+            default: "",
+        },
+
+        githubAvatar: {
+            type: String,
+            default: "",
+        },
+
+        githubAccessToken: {
+            type: String,
+            default: "",
+            select: false,
+        },
     },
     {
         timestamps: true,

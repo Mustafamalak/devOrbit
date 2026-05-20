@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 import activityRoutes from "./routes/activityRoutes.js";
+import githubRoutes from "./routes/githubRoutes.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/activities", activityRoutes);
+app.use("/api/github", githubRoutes);
 
 app.get("/", (req, res) => {
     res.json({

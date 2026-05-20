@@ -19,6 +19,8 @@ function sanitizeUser(user) {
         avatar: user.avatar,
         githubConnected: user.githubConnected,
         githubUsername: user.githubUsername,
+        githubProfileUrl: user.githubProfileUrl,
+        githubAvatar: user.githubAvatar,
         createdAt: user.createdAt,
     };
 }

@@ -26,6 +26,9 @@ function normalizeProject(project) {
     tasks: project.tasksCount || 0,
     bugs: project.bugsCount || 0,
     commits: project.commitsCount || 0,
+    tasksCount: project.tasksCount || 0,
+    bugsCount: project.bugsCount || 0,
+    commitsCount: project.commitsCount || 0,
   };
 }
 
@@ -36,6 +39,8 @@ export default function ProjectsGrid() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [createOpen, setCreateOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState(null);
+  const [deleteLoadingId, setDeleteLoadingId] = useState(null);
 
   async function loadProjects() {
     try {
@@ -56,6 +61,33 @@ export default function ProjectsGrid() {
 
   function handleCreated(project) {
     setProjects((current) => [project, ...current]);
+  }
+
+  function handleEdit(project) {
+    const originalProject = projects.find((item) => item._id === project._id);
+    setEditingProject(originalProject || project);
+    setCreateOpen(true);
+  }
+
+  async function handleDelete(project) {
+    const confirmed = window.confirm(
+      `Delete "${project.name}"? This will remove it from DevOrbit.`
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setDeleteLoadingId(project._id);
+      await projectApi.deleteProject(project._id);
+
+      setProjects((current) =>
+        current.filter((item) => item._id !== project._id)
+      );
+    } catch (err) {
+      alert(err.message || "Failed to delete project");
+    } finally {
+      setDeleteLoadingId(null);
+    }
   }
 
   const normalizedProjects = useMemo(() => {
@@ -81,8 +113,19 @@ export default function ProjectsGrid() {
     <div>
       <CreateProjectForm
         open={createOpen}
-        onClose={() => setCreateOpen(false)}
+        onClose={() => {
+          setCreateOpen(false);
+          setEditingProject(null);
+        }}
         onCreated={handleCreated}
+        onUpdated={(updatedProject) => {
+          setProjects((current) =>
+            current.map((project) =>
+              project._id === updatedProject._id ? updatedProject : project
+            )
+          );
+        }}
+        editProject={editingProject}
       />
 
       <div className="mb-6 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
@@ -121,7 +164,10 @@ export default function ProjectsGrid() {
 
           <button
             type="button"
-            onClick={() => setCreateOpen(true)}
+            onClick={() => {
+              setEditingProject(null);
+              setCreateOpen(true);
+            }}
             className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-400 via-orange-400 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-500/20 transition hover:scale-[1.02]"
           >
             <Plus size={17} />
@@ -179,7 +225,13 @@ export default function ProjectsGrid() {
           className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3"
         >
           {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
           ))}
         </motion.div>
       )}

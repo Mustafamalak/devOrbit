@@ -11,7 +11,7 @@ const columnStyles = {
   done: "border-emerald-400/20 bg-emerald-400/10 text-emerald-200",
 };
 
-export default function KanbanColumn({ column, tasks }) {
+export default function KanbanColumn({ column, tasks, onStatusChange, onDelete }) {
   return (
     <motion.section
       layout
@@ -42,7 +42,13 @@ export default function KanbanColumn({ column, tasks }) {
           </div>
         ) : (
           tasks.map((task, index) => (
-            <TaskCard key={task.id} task={task} index={index} />
+            <TaskCard
+              key={task.id}
+              task={task}
+              index={index}
+              onStatusChange={onStatusChange}
+              onDelete={onDelete}
+            />
           ))
         )}
       </div>
