@@ -10,17 +10,17 @@ export default function InsightsPage() {
   return (
     <div className="pb-10">
       <section className="mb-7">
-        <p className="text-sm font-medium text-cyan-300">
+        <p className="text-sm font-medium text-pink-300">
           Productivity Intelligence
         </p>
 
         <div className="mt-2 flex flex-col justify-between gap-4 xl:flex-row xl:items-end">
           <div>
-            <h1 className="text-4xl font-black tracking-tight text-white md:text-5xl">
+            <h1 className="glow-text text-4xl font-black tracking-tight text-white md:text-5xl">
               Developer <span className="text-gradient">Insights</span>
             </h1>
 
-            <p className="mt-3 max-w-3xl text-slate-400">
+            <p className="mt-3 max-w-3xl text-[#a89bb8]">
               Convert engineering activity into visual intelligence. Track
               commit velocity, task closure, quality pressure, focus hours, and
               sprint readiness from a single analytics cockpit.

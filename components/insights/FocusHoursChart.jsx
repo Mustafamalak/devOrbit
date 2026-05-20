@@ -24,24 +24,25 @@ export default function FocusHoursChart() {
 
       <ResponsiveContainer width="100%" height="78%">
         <LineChart data={focusHoursData}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.13)" />
-          <XAxis dataKey="day" stroke="#64748b" />
-          <YAxis stroke="#64748b" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+          <XAxis dataKey="day" stroke="#a89bb8" />
+          <YAxis stroke="#a89bb8" />
           <Tooltip
             contentStyle={{
-              background: "#020617",
-              border: "1px solid rgba(148,163,184,0.2)",
+              background: "#0b0614",
+              border: "1px solid rgba(255,255,255,0.14)",
               borderRadius: "16px",
-              color: "#f8fafc",
+              color: "#faf7ff",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
             }}
           />
 
           <Line
             type="monotone"
             dataKey="hours"
-            stroke="#10b981"
+            stroke="#34d399"
             strokeWidth={4}
-            dot={{ r: 5, fill: "#10b981" }}
+            dot={{ r: 5, fill: "#34d399" }}
             activeDot={{ r: 8 }}
           />
         </LineChart>

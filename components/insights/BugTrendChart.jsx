@@ -16,7 +16,7 @@ export default function BugTrendChart() {
   return (
     <GlassCard className="h-[380px]">
       <div className="mb-5">
-        <p className="text-sm text-red-300">Quality Signal</p>
+        <p className="text-sm text-rose-300">Quality Signal</p>
         <h2 className="mt-1 text-2xl font-black text-white">
           Bug Trend vs Resolution
         </h2>
@@ -25,43 +25,44 @@ export default function BugTrendChart() {
       <ResponsiveContainer width="100%" height="78%">
         <AreaChart data={bugTrendData}>
           <defs>
-            <linearGradient id="bugs" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#ef4444" stopOpacity={0.35} />
-              <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
+            <linearGradient id="bugsEmber" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#fb7185" stopOpacity={0.35} />
+              <stop offset="95%" stopColor="#fb7185" stopOpacity={0} />
             </linearGradient>
 
-            <linearGradient id="resolved" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#10b981" stopOpacity={0.35} />
-              <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+            <linearGradient id="resolvedEmber" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#34d399" stopOpacity={0.35} />
+              <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
             </linearGradient>
           </defs>
 
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.13)" />
-          <XAxis dataKey="sprint" stroke="#64748b" />
-          <YAxis stroke="#64748b" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+          <XAxis dataKey="sprint" stroke="#a89bb8" />
+          <YAxis stroke="#a89bb8" />
           <Tooltip
             contentStyle={{
-              background: "#020617",
-              border: "1px solid rgba(148,163,184,0.2)",
+              background: "#0b0614",
+              border: "1px solid rgba(255,255,255,0.14)",
               borderRadius: "16px",
-              color: "#f8fafc",
+              color: "#faf7ff",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
             }}
           />
 
           <Area
             type="monotone"
             dataKey="bugs"
-            stroke="#ef4444"
+            stroke="#fb7185"
             strokeWidth={3}
-            fill="url(#bugs)"
+            fill="url(#bugsEmber)"
           />
 
           <Area
             type="monotone"
             dataKey="resolved"
-            stroke="#10b981"
+            stroke="#34d399"
             strokeWidth={3}
-            fill="url(#resolved)"
+            fill="url(#resolvedEmber)"
           />
         </AreaChart>
       </ResponsiveContainer>

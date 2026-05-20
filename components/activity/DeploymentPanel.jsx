@@ -30,13 +30,13 @@ export default function DeploymentPanel() {
     <GlassCard className="h-full">
       <div className="mb-5 flex items-center justify-between">
         <div>
-          <p className="text-sm text-purple-300">Deployment Matrix</p>
+          <p className="text-sm text-orange-300">Deployment Matrix</p>
           <h2 className="mt-1 text-2xl font-black text-white">
             Release Channels
           </h2>
         </div>
 
-        <div className="grid h-11 w-11 place-items-center rounded-2xl border border-purple-400/20 bg-purple-400/10 text-purple-300">
+        <div className="grid h-11 w-11 place-items-center rounded-2xl border border-orange-400/20 bg-orange-400/10 text-orange-300">
           <Server size={21} />
         </div>
       </div>
@@ -45,15 +45,16 @@ export default function DeploymentPanel() {
         {deployments.map((item, index) => (
           <motion.div
             key={item.env}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: index * 0.07 }}
-            className="rounded-3xl border border-white/10 bg-white/4 p-4"
+            whileHover={{ y: -5, scale: 1.01 }}
+            className="rounded-3xl border border-white/10 bg-white/[0.045] p-4 transition hover:border-pink-300/25"
           >
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h3 className="font-bold text-white">{item.env}</h3>
-                <p className="mt-1 text-sm text-slate-400">{item.url}</p>
+                <p className="mt-1 text-sm text-[#a89bb8]">{item.url}</p>
               </div>
 
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
@@ -62,7 +63,7 @@ export default function DeploymentPanel() {
               </span>
             </div>
 
-            <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
+            <div className="mt-4 flex items-center gap-2 text-xs text-[#a89bb8]/70">
               <Clock3 size={14} />
               {item.time}
             </div>
@@ -70,15 +71,16 @@ export default function DeploymentPanel() {
         ))}
       </div>
 
-      <div className="mt-5 rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-4">
-        <div className="flex items-center gap-2 text-cyan-200">
+      <div className="mt-5 rounded-3xl border border-pink-400/20 bg-pink-400/10 p-4">
+        <div className="flex items-center gap-2 text-pink-200">
           <Zap size={17} />
           <p className="text-sm font-semibold">Release Insight</p>
         </div>
 
-        <p className="mt-2 text-sm leading-6 text-slate-300">
+        <p className="mt-2 text-sm leading-6 text-[#cfc3dd]">
           Your frontend system is moving toward deployment readiness. Complete
-          activity, insights, landing polish, responsiveness, and final SEO metadata.
+          activity, insights, landing polish, responsiveness, and final SEO
+          metadata.
         </p>
       </div>
     </GlassCard>

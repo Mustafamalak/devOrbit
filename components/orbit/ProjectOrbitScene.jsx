@@ -26,7 +26,9 @@ function OrbitRing({ radius }) {
       0
     );
 
-    return curve.getPoints(160).map((point) => new THREE.Vector3(point.x, 0, point.y));
+    return curve
+      .getPoints(180)
+      .map((point) => new THREE.Vector3(point.x, 0, point.y));
   }, [radius]);
 
   const geometry = useMemo(() => {
@@ -35,12 +37,7 @@ function OrbitRing({ radius }) {
 
   return (
     <line geometry={geometry}>
-      <lineBasicMaterial
-        color="#334155"
-        transparent
-        opacity={0.34}
-        linewidth={1}
-      />
+      <lineBasicMaterial color="#a855f7" transparent opacity={0.28} />
     </line>
   );
 }
@@ -50,8 +47,8 @@ function DeveloperCore() {
 
   useFrame((_, delta) => {
     if (coreRef.current) {
-      coreRef.current.rotation.y += delta * 0.35;
-      coreRef.current.rotation.x += delta * 0.12;
+      coreRef.current.rotation.y += delta * 0.38;
+      coreRef.current.rotation.x += delta * 0.14;
     }
   });
 
@@ -61,23 +58,23 @@ function DeveloperCore() {
         <mesh ref={coreRef}>
           <icosahedronGeometry args={[1.05, 4]} />
           <meshStandardMaterial
-            color="#22d3ee"
-            emissive="#0891b2"
-            emissiveIntensity={0.65}
-            roughness={0.22}
-            metalness={0.35}
+            color="#ff4ecd"
+            emissive="#ff4ecd"
+            emissiveIntensity={0.7}
+            roughness={0.2}
+            metalness={0.42}
           />
         </mesh>
 
-        <mesh scale={1.25}>
+        <mesh scale={1.28}>
           <icosahedronGeometry args={[1.05, 2]} />
-          <meshBasicMaterial color="#22d3ee" transparent opacity={0.08} wireframe />
+          <meshBasicMaterial color="#ff8a3d" transparent opacity={0.09} wireframe />
         </mesh>
 
         <Text
           position={[0, -1.65, 0]}
           fontSize={0.22}
-          color="#e0f2fe"
+          color="#faf7ff"
           anchorX="center"
           anchorY="middle"
         >
@@ -85,7 +82,8 @@ function DeveloperCore() {
         </Text>
       </Float>
 
-      <pointLight position={[0, 0, 0]} intensity={4.5} color="#22d3ee" />
+      <pointLight position={[0, 0, 0]} intensity={5.2} color="#ff4ecd" />
+      <pointLight position={[2, 2, 2]} intensity={1.6} color="#ff8a3d" />
     </group>
   );
 }
@@ -121,24 +119,24 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
           event.stopPropagation();
           setSelectedProject(project);
         }}
-        scale={isSelected ? 1.25 : 1}
+        scale={isSelected ? 1.28 : 1}
       >
         <sphereGeometry args={[project.size, 48, 48]} />
         <meshStandardMaterial
           color={project.color}
           emissive={project.color}
-          emissiveIntensity={isSelected ? 0.75 : 0.35}
-          roughness={0.28}
-          metalness={0.25}
+          emissiveIntensity={isSelected ? 0.85 : 0.42}
+          roughness={0.25}
+          metalness={0.28}
         />
       </mesh>
 
-      <mesh scale={isSelected ? 1.55 : 1.28}>
+      <mesh scale={isSelected ? 1.65 : 1.3}>
         <sphereGeometry args={[project.size, 32, 32]} />
         <meshBasicMaterial
           color={project.color}
           transparent
-          opacity={isSelected ? 0.18 : 0.08}
+          opacity={isSelected ? 0.2 : 0.08}
         />
       </mesh>
 
@@ -148,7 +146,7 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
         distanceFactor={8}
         style={{ pointerEvents: "none" }}
       >
-        <div className="rounded-full border border-white/15 bg-slate-950/75 px-3 py-1 text-xs font-semibold text-white shadow-xl backdrop-blur-xl">
+        <div className="rounded-full border border-white/15 bg-[#0b0614]/80 px-3 py-1 text-xs font-semibold text-white shadow-xl backdrop-blur-xl">
           {project.name}
         </div>
       </Html>
@@ -159,7 +157,7 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
           scale={[1.4, 1.4, 1.4]}
           size={2}
           speed={0.35}
-          color="#ef4444"
+          color="#fb7185"
         />
       )}
     </group>
@@ -169,11 +167,29 @@ function ProjectPlanet({ project, index, selectedProject, setSelectedProject }) 
 function OrbitUniverse({ selectedProject, setSelectedProject }) {
   return (
     <>
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[5, 5, 5]} intensity={1.8} />
-      <pointLight position={[-4, 3, -5]} intensity={1.2} color="#8b5cf6" />
+      <ambientLight intensity={0.72} />
+      <directionalLight position={[5, 5, 5]} intensity={1.7} />
+      <pointLight position={[-4, 3, -5]} intensity={1.4} color="#7c3aed" />
+      <pointLight position={[4, -2, 3]} intensity={1.1} color="#ff8a3d" />
 
-      <Stars radius={90} depth={45} count={2200} factor={4} saturation={0} fade speed={1} />
+      <Stars
+        radius={95}
+        depth={48}
+        count={2600}
+        factor={4}
+        saturation={0}
+        fade
+        speed={1}
+      />
+
+      <Sparkles
+        count={70}
+        scale={[13, 7, 13]}
+        size={2}
+        speed={0.28}
+        color="#ff4ecd"
+        opacity={0.5}
+      />
 
       <DeveloperCore />
 
@@ -203,17 +219,33 @@ function OrbitUniverse({ selectedProject, setSelectedProject }) {
   );
 }
 
+function getStatusStyle(status) {
+  if (status === "Healthy") {
+    return "border-emerald-400/20 bg-emerald-400/10 text-emerald-300";
+  }
+
+  if (status === "Warning") {
+    return "border-orange-400/20 bg-orange-400/10 text-orange-300";
+  }
+
+  if (status === "Prototype") {
+    return "border-violet-400/20 bg-violet-400/10 text-violet-300";
+  }
+
+  return "border-rose-400/20 bg-rose-400/10 text-rose-300";
+}
+
 export default function ProjectOrbitScene() {
   const [selectedProject, setSelectedProject] = useState(orbitProjects[0]);
 
   return (
     <div className="grid min-h-[calc(100vh-8rem)] gap-6 xl:grid-cols-[1fr_380px]">
-      <div className="relative overflow-hidden rounded-4xl border border-white/10 bg-slate-950/80 shadow-2xl shadow-cyan-950/30">
-        <div className="absolute left-5 top-5 z-10 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium text-cyan-200 backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0614]/82 shadow-2xl shadow-pink-950/30">
+        <div className="absolute left-5 top-5 z-10 rounded-full border border-pink-400/20 bg-pink-400/10 px-4 py-2 text-xs font-medium text-pink-200 backdrop-blur-xl">
           Interactive 3D Project Universe
         </div>
 
-        <div className="absolute bottom-5 left-5 z-10 max-w-md rounded-3xl border border-white/10 bg-slate-950/65 p-4 text-sm text-slate-300 backdrop-blur-xl">
+        <div className="absolute bottom-5 left-5 z-10 max-w-md rounded-3xl border border-white/10 bg-[#0b0614]/70 p-4 text-sm text-[#cfc3dd] backdrop-blur-xl">
           Drag to rotate. Scroll to zoom. Click any project planet to inspect its
           workflow health, sprint status, task load, and stack.
         </div>
@@ -226,52 +258,52 @@ export default function ProjectOrbitScene() {
         </Canvas>
       </div>
 
-      <aside className="rounded-4xl border border-white/10 bg-slate-950/75 p-5 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+      <aside className="premium-card rounded-[2rem] p-5">
         <div className="mb-5">
-          <p className="text-sm text-cyan-300">Selected Project</p>
+          <p className="text-sm text-pink-300">Selected Project</p>
           <h2 className="mt-2 text-3xl font-black text-white">
             {selectedProject.name}
           </h2>
-          <p className="mt-1 text-sm text-slate-400">{selectedProject.type}</p>
+          <p className="mt-1 text-sm text-[#a89bb8]">{selectedProject.type}</p>
         </div>
 
-        <div className="mb-5 rounded-3xl border border-white/10 bg-white/4 p-4">
+        <div className="mb-5 rounded-3xl border border-white/10 bg-white/[0.045] p-4">
           <div className="mb-3 flex items-center justify-between">
-            <span className="text-sm text-slate-400">Health Score</span>
-            <span className="font-bold text-cyan-300">
+            <span className="text-sm text-[#a89bb8]">Health Score</span>
+            <span className="font-bold text-pink-300">
               {selectedProject.health}%
             </span>
           </div>
 
-          <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+          <div className="h-2 overflow-hidden rounded-full bg-[#140c23]">
             <div
-              className="h-full rounded-full bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500"
+              className="h-full rounded-full bg-gradient-to-r from-pink-400 via-orange-400 to-violet-600"
               style={{ width: `${selectedProject.health}%` }}
             />
           </div>
         </div>
 
-        <p className="mb-5 text-sm leading-7 text-slate-300">
+        <p className="mb-5 text-sm leading-7 text-[#cfc3dd]">
           {selectedProject.description}
         </p>
 
         <div className="mb-5 grid grid-cols-3 gap-3">
-          <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
-            <p className="text-xs text-slate-500">Tasks</p>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+            <p className="text-xs text-[#a89bb8]/70">Tasks</p>
             <p className="mt-1 text-2xl font-black text-white">
               {selectedProject.tasks}
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
-            <p className="text-xs text-slate-500">Bugs</p>
-            <p className="mt-1 text-2xl font-black text-red-300">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+            <p className="text-xs text-[#a89bb8]/70">Bugs</p>
+            <p className="mt-1 text-2xl font-black text-rose-300">
               {selectedProject.bugs}
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
-            <p className="text-xs text-slate-500">Commits</p>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">
+            <p className="text-xs text-[#a89bb8]/70">Commits</p>
             <p className="mt-1 text-2xl font-black text-emerald-300">
               {selectedProject.commits}
             </p>
@@ -279,12 +311,12 @@ export default function ProjectOrbitScene() {
         </div>
 
         <div className="mb-5">
-          <p className="mb-3 text-sm font-medium text-slate-300">Stack</p>
+          <p className="mb-3 text-sm font-medium text-[#cfc3dd]">Stack</p>
           <div className="flex flex-wrap gap-2">
             {selectedProject.stack.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200"
+                className="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-1 text-xs text-pink-200"
               >
                 {tech}
               </span>
@@ -292,16 +324,16 @@ export default function ProjectOrbitScene() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-purple-400/20 bg-purple-400/10 p-4">
-          <p className="text-sm font-semibold text-purple-200">
-            Orbit Intelligence
-          </p>
-          <p className="mt-2 text-sm leading-6 text-slate-300">
+        <div className={`rounded-3xl border p-4 ${getStatusStyle(selectedProject.status)}`}>
+          <p className="text-sm font-semibold">Orbit Intelligence</p>
+          <p className="mt-2 text-sm leading-6 text-[#cfc3dd]">
             {selectedProject.status === "Healthy"
               ? "This project is stable and ready for feature expansion."
               : selectedProject.status === "Warning"
-              ? "This project needs focused sprint cleanup before new feature work."
-              : "This project requires review. Resolve bug clusters and reduce open tasks first."}
+                ? "This project needs focused sprint cleanup before new feature work."
+                : selectedProject.status === "Prototype"
+                  ? "This project is in early orbit. Validate workflow before scaling."
+                  : "This project requires review. Resolve bug clusters and reduce open tasks first."}
           </p>
         </div>
       </aside>
