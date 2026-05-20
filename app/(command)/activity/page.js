@@ -7,6 +7,7 @@ import ActivityTimeline from "@/components/activity/ActivityTimeline";
 import DeploymentPanel from "@/components/activity/DeploymentPanel";
 import CreateActivityForm from "@/components/activity/CreateActivityForm";
 import { activityApi } from "@/lib/api";
+import GitHubCommitSyncCard from "@/components/github/GitHubCommitSyncCard";
 
 export default function ActivityPage() {
   const [activities, setActivities] = useState([]);
@@ -68,6 +69,14 @@ export default function ActivityPage() {
             Add Activity
           </button>
         </div>
+      </section>
+
+      <section className="mb-6">
+        <GitHubCommitSyncCard
+          onSynced={() => {
+            loadActivities();
+          }}
+        />
       </section>
 
       {loading ? (

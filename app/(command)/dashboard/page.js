@@ -10,6 +10,7 @@ import AiSummaryCard from "@/components/dashboard/AiSummaryCard";
 import DashboardSpaceBackground from "@/components/dashboard/DashboardSpaceBackground";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { activityApi, projectApi, taskApi } from "@/lib/api";
+import GitHubCommitSyncCard from "@/components/github/GitHubCommitSyncCard";
 
 function buildMetrics(projects, tasks, activities) {
   const totalBugs = projects.reduce(
@@ -159,6 +160,14 @@ export default function DashboardPage() {
         </div>
       ) : (
         <div className="relative z-10">
+          <section className="mb-6">
+            <GitHubCommitSyncCard
+              onSynced={() => {
+                loadDashboard();
+              }}
+            />
+          </section>
+
           <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {dashboardMetrics.map((metric, index) => (
               <MetricCard key={metric.label} metric={metric} index={index} />
