@@ -5,6 +5,9 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import taskRoutes from "./routes/taskRoutes.js";
+import activityRoutes from "./routes/activityRoutes.js";
 
 dotenv.config();
 
@@ -25,6 +28,9 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/activities", activityRoutes);
 
 app.get("/", (req, res) => {
     res.json({

@@ -1,11 +1,16 @@
-import DashboardSpaceBackground from "@/components/dashboard/DashboardSpaceBackground";import MetricCard from "@/components/dashboard/MetricCard";
+"use client";
+
+import DashboardSpaceBackground from "@/components/dashboard/DashboardSpaceBackground";
+import MetricCard from "@/components/dashboard/MetricCard";
 import ProductivityChart from "@/components/dashboard/ProductivityChart";
 import ProjectHealth from "@/components/dashboard/ProjectHealth";
 import ActivityFeed from "@/components/dashboard/ActivityFeed";
 import AiSummaryCard from "@/components/dashboard/AiSummaryCard";
+import { useAuth } from "@/components/auth/AuthProvider";
 import { metrics } from "@/data/mockData";
 
 export default function DashboardPage() {
+  const { user } = useAuth();
   return (
     <div className="pb-10">
       <DashboardSpaceBackground />
@@ -19,7 +24,7 @@ export default function DashboardPage() {
           <div>
             <h1 className="glow-text text-4xl font-black tracking-tight text-white md:text-5xl">
               Welcome back,{" "}
-              <span className="text-gradient">Mustafa</span>
+              <span className="text-gradient">{user?.name?.split(" ")[0] || "Developer"}</span>
             </h1>
 
             <p className="mt-3 max-w-2xl text-slate-400">
@@ -30,8 +35,8 @@ export default function DashboardPage() {
           </div>
 
           <div className="rounded-2xl border border-pink-400/20 bg-pink-400/10 px-4 py-3 text-sm text-pink-200">
-  System Sync: Live Mock Mode
-</div>
+            System Sync: Live Mock Mode
+          </div>
         </div>
       </section>
 

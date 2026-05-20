@@ -1,5 +1,6 @@
 import "./globals.css";
 import CursorGlow from "@/components/ui/CursorGlow";
+import { AuthProvider } from "@/components/auth/AuthProvider";
 
 export const metadata = {
   title: {
@@ -42,8 +43,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <CursorGlow />
-        <div className="relative z-10">{children}</div>
+        <AuthProvider>
+          <CursorGlow />
+          <div className="relative z-10">{children}</div>
+        </AuthProvider>
       </body>
     </html>
   );
