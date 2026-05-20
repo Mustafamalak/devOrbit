@@ -1,77 +1,150 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Radar, Search, SlidersHorizontal } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { AlertTriangle, Loader2, Plus } from "lucide-react";
 import KanbanColumn from "@/components/tasks/KanbanColumn";
-import GlassCard from "@/components/ui/GlassCard";
-import { taskColumns } from "@/data/mockData";
+import CreateTaskForm from "@/components/tasks/CreateTaskForm";
+import { taskApi } from "@/lib/api";
+
+const columns = [
+  {
+    id: "backlog",
+    title: "Backlog",
+    subtitle: "Ideas waiting for execution",
+  },
+  {
+    id: "progress",
+    title: "In Progress",
+    subtitle: "Currently under development",
+  },
+  {
+    id: "review",
+    title: "Review",
+    subtitle: "Needs testing or approval",
+  },
+  {
+    id: "done",
+    title: "Done",
+    subtitle: "Completed sprint items",
+  },
+];
+
+function normalizeTask(task) {
+  return {
+    id: task._id,
+    _id: task._id,
+    title: task.title,
+    description: task.description,
+    status: task.status,
+    priority: task.priority,
+    dueDate: task.dueDate,
+    points: task.points,
+    tags: task.tags || [],
+    projectName: task.project?.name || "Unknown Project",
+  };
+}
 
 export default function TaskBoard() {
-  const totalTasks = taskColumns.reduce(
-    (sum, column) => sum + column.tasks.length,
-    0
-  );
+  const [tasks, setTasks] = useState([]);
+  const [createOpen, setCreateOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const totalPoints = taskColumns.reduce((sum, column) => {
-    return sum + column.tasks.reduce((acc, task) => acc + task.points, 0);
-  }, 0);
+  async function loadTasks() {
+    try {
+      setLoading(true);
+      setError("");
+      const data = await taskApi.getTasks();
+      setTasks(data.tasks || []);
+    } catch (err) {
+      setError(err.message || "Failed to load tasks");
+    } finally {
+      setLoading(false);
+    }
+  }
 
-  const criticalTasks = taskColumns.reduce((sum, column) => {
-    return (
-      sum + column.tasks.filter((task) => task.priority === "Critical").length
-    );
-  }, 0);
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
+  function handleCreated(task) {
+    setTasks((current) => [task, ...current]);
+  }
+
+  const normalizedTasks = useMemo(() => {
+    return tasks.map(normalizeTask);
+  }, [tasks]);
+
+  const tasksByColumn = useMemo(() => {
+    return columns.reduce((acc, column) => {
+      acc[column.id] = normalizedTasks.filter(
+        (task) => task.status === column.id
+      );
+      return acc;
+    }, {});
+  }, [normalizedTasks]);
 
   return (
     <div>
-      <section className="mb-6 grid gap-4 md:grid-cols-3">
-        {[
-          ["Total Tasks", totalTasks, "Across active sprint", "text-pink-300"],
-          ["Sprint Points", totalPoints, "Estimated workload", "text-orange-300"],
-          ["Critical Tasks", criticalTasks, "Needs priority execution", "text-rose-300"],
-        ].map(([label, value, description, tone], index) => (
-          <motion.div
-            key={label}
-            initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: index * 0.07 }}
+      <CreateTaskForm
+        open={createOpen}
+        onClose={() => setCreateOpen(false)}
+        onCreated={handleCreated}
+      />
+
+      <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+        <div>
+          <p className="text-sm text-pink-300">MongoDB Task Board</p>
+          <h2 className="mt-1 text-2xl font-black text-white">
+            User-specific sprint lanes
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setCreateOpen(true)}
+          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-400 via-orange-400 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-500/20 transition hover:scale-[1.02]"
+        >
+          <Plus size={17} />
+          Add Task
+        </button>
+      </div>
+
+      {loading ? (
+        <div className="premium-card rounded-[2rem] p-10 text-center">
+          <Loader2 className="mx-auto mb-4 animate-spin text-pink-300" size={34} />
+          <p className="text-lg font-semibold text-white">Loading tasks</p>
+          <p className="mt-2 text-[#a89bb8]">
+            Fetching your sprint board from MongoDB.
+          </p>
+        </div>
+      ) : error ? (
+        <div className="premium-card rounded-[2rem] p-10 text-center">
+          <AlertTriangle className="mx-auto mb-4 text-rose-300" size={34} />
+          <p className="text-lg font-semibold text-white">
+            Could not load tasks
+          </p>
+          <p className="mt-2 text-[#a89bb8]">{error}</p>
+
+          <button
+            type="button"
+            onClick={loadTasks}
+            className="mt-5 rounded-full border border-pink-400/20 bg-pink-400/10 px-5 py-3 text-sm font-semibold text-pink-200 transition hover:bg-pink-400/15"
           >
-            <GlassCard className="p-5">
-              <p className={`text-sm ${tone}`}>{label}</p>
-              <h2 className="mt-2 text-4xl font-black text-white">{value}</h2>
-              <p className="mt-2 text-sm text-[#a89bb8]">{description}</p>
-            </GlassCard>
-          </motion.div>
-        ))}
-      </section>
-
-      <section className="mb-6 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
-        <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-[#a89bb8] transition focus-within:border-pink-300/30 xl:w-96">
-          <Search size={18} className="text-pink-300" />
-          <input
-            className="w-full bg-transparent text-sm text-white outline-none placeholder:text-[#a89bb8]/60"
-            placeholder="Search task radar..."
-          />
-        </div>
-
-        <div className="flex flex-wrap gap-3">
-          <button className="inline-flex items-center gap-2 rounded-full border border-pink-400/20 bg-pink-400/10 px-4 py-2 text-sm font-semibold text-pink-200 transition hover:bg-pink-400/15">
-            <Radar size={16} />
-            Sprint Radar
-          </button>
-
-          <button className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-[#cfc3dd] transition hover:border-pink-300/30 hover:text-white">
-            <SlidersHorizontal size={16} />
-            Priority View
+            Retry
           </button>
         </div>
-      </section>
-
-      <section className="grid gap-5 xl:grid-cols-4">
-        {taskColumns.map((column, index) => (
-          <KanbanColumn key={column.id} column={column} index={index} />
-        ))}
-      </section>
+      ) : (
+        <div className="grid gap-5 xl:grid-cols-4">
+          {columns.map((column) => (
+            <KanbanColumn
+              key={column.id}
+              column={column}
+              tasks={tasksByColumn[column.id] || []}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

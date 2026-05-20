@@ -1,63 +1,96 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { CheckCircle2, GitMerge, PlusCircle, TriangleAlert } from "lucide-react";
+import {
+  Bug,
+  FolderPlus,
+  GitCommit,
+  GitPullRequest,
+  ListTodo,
+  Rocket,
+  ShieldCheck,
+  TriangleAlert,
+} from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
-import { recentActivity } from "@/data/mockData";
 
-const icons = {
-  merged: GitMerge,
-  fixed: CheckCircle2,
-  created: PlusCircle,
-  warning: TriangleAlert,
+const typeIcons = {
+  commit: GitCommit,
+  pull_request: GitPullRequest,
+  issue: TriangleAlert,
+  deploy: Rocket,
+  review: ShieldCheck,
+  bug: Bug,
+  task: ListTodo,
+  project: FolderPlus,
 };
 
-const colors = {
-  merged: "text-violet-300 bg-violet-400/10 border-violet-400/20",
-  fixed: "text-emerald-300 bg-emerald-400/10 border-emerald-400/20",
-  created: "text-pink-300 bg-pink-400/10 border-pink-400/20",
-  warning: "text-amber-300 bg-amber-400/10 border-amber-400/20",
-};
+function formatTime(date) {
+  if (!date) return "Recently";
 
-export default function ActivityFeed() {
+  const createdAt = new Date(date);
+  const diffMs = Date.now() - createdAt.getTime();
+  const diffMinutes = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMinutes < 1) return "Just now";
+  if (diffMinutes < 60) return `${diffMinutes} min ago`;
+  if (diffHours < 24) return `${diffHours} hr ago`;
+  if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+
+  return createdAt.toLocaleDateString();
+}
+
+export default function ActivityFeed({ activities }) {
+  const visibleActivities = activities.slice(0, 6);
+
   return (
-    <GlassCard>
+    <GlassCard className="h-full">
       <div className="mb-5">
-        <p className="text-sm text-pink-300">Live Activity Stream</p>
-        <h2 className="mt-1 text-2xl font-bold text-white">
-          Recent Engineering Events
+        <p className="text-sm text-orange-300">Recent Activity</p>
+        <h2 className="mt-1 text-2xl font-black text-white">
+          Engineering Feed
         </h2>
       </div>
 
       <div className="space-y-4">
-        {recentActivity.map((item, index) => {
-          const Icon = icons[item.status];
+        {visibleActivities.length === 0 ? (
+          <div className="rounded-3xl border border-dashed border-white/10 bg-white/[0.025] p-6 text-center">
+            <p className="font-semibold text-white">No activity yet</p>
+            <p className="mt-2 text-sm text-[#a89bb8]">
+              Project and task actions will appear here.
+            </p>
+          </div>
+        ) : (
+          visibleActivities.map((item) => {
+            const Icon = typeIcons[item.type] || FolderPlus;
 
-          return (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: index * 0.08 }}
-              className="flex gap-4 rounded-3xl border border-white/10 bg-white/[0.035] p-4 transition hover:border-pink-300/30 hover:bg-white/[0.07]"
-            >
+            return (
               <div
-                className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl border ${colors[item.status]}`}
+                key={item._id}
+                className="flex gap-3 rounded-3xl border border-white/10 bg-white/[0.045] p-4 transition hover:border-pink-300/25"
               >
-                <Icon size={19} />
-              </div>
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-pink-400/20 bg-pink-400/10 text-pink-300">
+                  <Icon size={17} />
+                </div>
 
-              <div className="min-w-0 flex-1">
-                <h3 className="truncate font-semibold text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-1 text-sm text-[#a89bb8]">{item.meta}</p>
-              </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-white">
+                    {item.title}
+                  </p>
 
-              <p className="shrink-0 text-xs text-[#a89bb8]/70">{item.time}</p>
-            </motion.div>
-          );
-        })}
+                  <p className="mt-1 line-clamp-2 text-xs text-[#a89bb8]">
+                    {item.description || "No description"}
+                  </p>
+
+                  <div className="mt-2 flex items-center justify-between gap-3 text-xs text-[#a89bb8]/70">
+                    <span>{item.project?.name || "Global"}</span>
+                    <span>{formatTime(item.createdAt)}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
     </GlassCard>
   );

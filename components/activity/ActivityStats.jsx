@@ -4,15 +4,46 @@ import { motion } from "framer-motion";
 import CountUp from "react-countup";
 import { Activity, GitCommit, GitPullRequest, Rocket } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
-import { activityStats } from "@/data/mockData";
 
 const icons = [GitCommit, GitPullRequest, Activity, Rocket];
-const tones = ["text-pink-300", "text-violet-300", "text-orange-300", "text-emerald-300"];
+const tones = [
+  "text-pink-300",
+  "text-violet-300",
+  "text-orange-300",
+  "text-emerald-300",
+];
 
-export default function ActivityStats() {
+function buildStats(activities) {
+  return [
+    {
+      label: "Commits",
+      value: activities.filter((item) => item.type === "commit").length,
+      detail: "tracked commit events",
+    },
+    {
+      label: "Pull Requests",
+      value: activities.filter((item) => item.type === "pull_request").length,
+      detail: "merged or reviewed PRs",
+    },
+    {
+      label: "Total Events",
+      value: activities.length,
+      detail: "all logged activities",
+    },
+    {
+      label: "Deployments",
+      value: activities.filter((item) => item.type === "deploy").length,
+      detail: "release events",
+    },
+  ];
+}
+
+export default function ActivityStats({ activities }) {
+  const stats = buildStats(activities);
+
   return (
     <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      {activityStats.map((stat, index) => {
+      {stats.map((stat, index) => {
         const Icon = icons[index];
 
         return (
