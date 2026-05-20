@@ -29,7 +29,7 @@ export default function AppShell({ children }) {
 
   return (
     <div className="min-h-screen text-white">
-      <div className="fixed inset-0 -z-20 bg-slate-950" />
+      <div className="fixed inset-0 -z-20 bg-[#06030f]" />
       <div className="fixed inset-0 -z-10 grid-bg opacity-35" />
       <div className="fixed left-1/3 top-10 -z-10 h-72 w-72 rounded-full bg-pink-500/12 blur-3xl" />
       <div className="fixed bottom-20 right-10 -z-10 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
@@ -47,7 +47,7 @@ export default function AppShell({ children }) {
         onClose={() => setCommandOpen(false)}
       />
 
-      <main className="min-h-screen px-4 py-4 lg:ml-80 lg:px-6">
+      <main className="min-h-screen min-w-0 px-4 pb-6 pt-3 sm:px-5 lg:ml-80 lg:px-6 lg:pb-8">
         <Topbar
           onMenuClick={() => setMobileNavOpen(true)}
           onCommandClick={() => setCommandOpen(true)}

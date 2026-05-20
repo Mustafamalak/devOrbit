@@ -242,7 +242,7 @@ export default function InsightsPage() {
             ))}
           </section>
 
-          <section className="mt-6 grid gap-6 xl:grid-cols-2">
+          <section className="mt-6 grid min-w-0 gap-6 xl:grid-cols-2">
             <CommitChart data={commitChartData} />
             <TaskCompletionChart data={taskDistributionData} />
             <BugTrendChart data={bugTrendData} />

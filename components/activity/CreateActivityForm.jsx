@@ -73,10 +73,10 @@ export default function CreateActivityForm({ open, onClose, onCreated }) {
     }
 
     return (
-        <div className="fixed inset-0 z-[90] grid place-items-start overflow-y-auto bg-black/70 px-4 py-10 backdrop-blur-md md:place-items-center">
+        <div className="fixed inset-0 z-[90] grid place-items-start overflow-y-auto bg-black/70 px-3 py-6 backdrop-blur-md sm:px-4 sm:py-10 md:place-items-center">
             <form
                 onSubmit={handleSubmit}
-                className="animated-gradient-border w-full max-w-2xl rounded-[2rem] bg-[#0b0614]/95 p-6 shadow-2xl shadow-pink-950/40"
+                className="animated-gradient-border w-full max-w-2xl rounded-[2rem] bg-[#0b0614]/95 p-5 shadow-2xl shadow-pink-950/40 sm:p-6"
             >
                 <div className="mb-6 flex items-start justify-between gap-4">
                     <div>

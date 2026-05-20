@@ -266,8 +266,8 @@ export default function ProjectOrbitScene({ projects }) {
   const activeProject = selectedProject || projects[0];
 
   return (
-    <div className="grid min-h-[calc(100vh-8rem)] gap-6 xl:grid-cols-[1fr_380px]">
-      <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0614]/82 shadow-2xl shadow-pink-950/30">
+    <div className="grid min-h-[calc(100vh-8rem)] min-w-0 gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
+      <div className="relative min-h-[30rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b0614]/82 shadow-2xl shadow-pink-950/30">
         <div className="absolute left-5 top-5 z-10 rounded-full border border-pink-400/20 bg-pink-400/10 px-4 py-2 text-xs font-medium text-pink-200 backdrop-blur-xl">
           MongoDB Project Universe
         </div>

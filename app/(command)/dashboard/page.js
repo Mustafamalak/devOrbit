@@ -174,12 +174,12 @@ export default function DashboardPage() {
             ))}
           </section>
 
-          <section className="mt-6 grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
+          <section className="mt-6 grid min-w-0 gap-6 xl:grid-cols-[1.35fr_0.65fr]">
             <ProductivityChart tasks={tasks} activities={activities} />
             <ProjectHealth projects={projects} />
           </section>
 
-          <section className="mt-6 grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
+          <section className="mt-6 grid min-w-0 gap-6 xl:grid-cols-[0.8fr_1.2fr]">
             <ActivityFeed activities={activities} />
             <AiSummaryCard />
           </section>

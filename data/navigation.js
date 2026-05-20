@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   Orbit,
   Target,
+  Settings,
 } from "lucide-react";
 
 export const commandNavItems = [
@@ -44,4 +45,9 @@ export const commandNavItems = [
     icon: BarChart3,
     description: "Productivity analytics cockpit",
   },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: Settings,
+  }
 ];
