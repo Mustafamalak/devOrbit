@@ -181,11 +181,7 @@ export default function DashboardPage() {
 
           <section className="mt-6 grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
             <ActivityFeed activities={activities} />
-            <AiSummaryCard
-              projects={projects}
-              tasks={tasks}
-              activities={activities}
-            />
+            <AiSummaryCard />
           </section>
         </div>
       )}

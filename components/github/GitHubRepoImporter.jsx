@@ -5,7 +5,6 @@ import {
     AlertTriangle,
     CheckCircle2,
     GitFork,
-    Github,
     Import,
     Loader2,
     Lock,
@@ -13,6 +12,7 @@ import {
     Star,
     Unlock,
 } from "lucide-react";
+import GitHubMark from "@/components/ui/GitHubMark";
 import GlassCard from "@/components/ui/GlassCard";
 import { githubApi } from "@/lib/api";
 
@@ -172,7 +172,7 @@ export default function GitHubRepoImporter({ onImported }) {
                 <div className="grid max-h-[32rem] gap-3 overflow-y-auto pr-1 md:grid-cols-2">
                     {filteredRepos.length === 0 ? (
                         <div className="rounded-3xl border border-dashed border-white/10 bg-white/[0.025] p-6 text-center md:col-span-2">
-                            <Github className="mx-auto mb-3 text-pink-300" size={28} />
+                            <GitHubMark className="mx-auto mb-3 text-pink-300" size={28} />
                             <p className="font-semibold text-white">No repositories found</p>
                             <p className="mt-2 text-sm text-[#a89bb8]">
                                 Try a different search term.
@@ -189,10 +189,10 @@ export default function GitHubRepoImporter({ onImported }) {
                                     onClick={() => toggleRepo(repo)}
                                     disabled={repo.alreadyImported}
                                     className={`rounded-3xl border p-4 text-left transition ${repo.alreadyImported
-                                            ? "cursor-not-allowed border-emerald-400/20 bg-emerald-400/10 opacity-75"
-                                            : selected
-                                                ? "border-pink-300/50 bg-pink-400/10 shadow-lg shadow-pink-500/10"
-                                                : "border-white/10 bg-white/[0.045] hover:border-pink-300/30 hover:bg-white/[0.07]"
+                                        ? "cursor-not-allowed border-emerald-400/20 bg-emerald-400/10 opacity-75"
+                                        : selected
+                                            ? "border-pink-300/50 bg-pink-400/10 shadow-lg shadow-pink-500/10"
+                                            : "border-white/10 bg-white/[0.045] hover:border-pink-300/30 hover:bg-white/[0.07]"
                                         }`}
                                 >
                                     <div className="mb-3 flex items-start justify-between gap-3">

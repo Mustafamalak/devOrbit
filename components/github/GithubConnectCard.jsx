@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Github, Loader2, PlugZap, ShieldCheck } from "lucide-react";
+import { Loader2, PlugZap, ShieldCheck } from "lucide-react";
+import GitHubMark from "@/components/ui/GitHubMark";
 import GlassCard from "@/components/ui/GlassCard";
 import GitHubRepoImporter from "@/components/github/GitHubRepoImporter";
 import { githubApi } from "@/lib/api";
@@ -68,7 +69,7 @@ export default function GitHubConnectCard({ onImported }) {
                         </div>
 
                         <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/5 text-white">
-                            <Github size={24} />
+                            <GitHubMark size={24} />
                         </div>
                     </div>
 
